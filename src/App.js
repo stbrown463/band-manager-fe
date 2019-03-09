@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import AuthContainer from './AuthContainer'
 import './App.css';
+require('dotenv').config()
 
 class App extends Component {
   constructor () {
@@ -25,20 +26,51 @@ class App extends Component {
 
 
   handleChange = (e) => {
-    console.log('handlechange is called');
+    // console.log('handlechange is called');
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
-  handleRegister = (e) => {
-    e.preventDefault()
-    console.log("called handleRegiester");
+  handleRegister = async (e) => {
+    e.preventDefault();
+    // console.log("called handleRegiester");
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+
+      })
+
+      const parsedResponse = await response.json()
+      console.log(parsedResponse);
+
+      // if (registerResponse.ok) {
+      //   this.setState({
+      //     user_id: registerParsed.id,
+      //     username: registerParsed.username
+      //   });
+      //   this.listIngredients();
+      //   this.props.history.push('/home')
+      // }
+
+
+
+    } catch (err) {
+      console.log(err)
+    }
+
   }
 
-  handleLogin = (e) => {
-    e.preventDefault()
-    console.log("called handleLogin");
+  handleLogin = async (e) => {
+    e.preventDefault();
+    // console.log("called handleLogin");
+
   }
 
 

@@ -11,6 +11,18 @@ class AuthContainer extends Component {
 		}
 	}
 
+	showRegister = (e) => {
+		e.preventDefault()
+		if (this.state.showRegister) {
+			this.setState({
+				showRegister: false
+			})
+		} else {
+			this.setState({
+				showRegister: true
+			})
+		}
+	}
 
 
 
@@ -19,12 +31,12 @@ class AuthContainer extends Component {
 		// console.log(this.props);
 		return (
 			<div>
-				<h1>This is auth container</h1>
-				<Login 
+				<h2>This is auth container</h2>
+				{this.state.showRegister ? <Login 
 					handleLogin={this.props.handleLogin} 
 					handleChange={this.props.handleChange} 
 					username={this.props.username}
-					password={this.props.password} />
+					password={this.props.password} /> :
 				<Register
 					handleRegister={this.props.handleRegister} 
 					handleChange={this.props.handleChange}
@@ -35,8 +47,10 @@ class AuthContainer extends Component {
 					name={this.props.name}
 					bio={this.props.bio}
 					city={this.props.city}
-					state={this.props.state} />
+					state={this.props.state} /> }
+				<button onClick={this.showRegister}>{this.state.showRegister ? "Show Regiser" : "Show Login" }</button> 
 			</div>
+
 
 		)
 	}
