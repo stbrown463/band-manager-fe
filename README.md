@@ -31,9 +31,11 @@
 ```
 	Users sees scrollable lists of cards for bands, venues, and contacts in that city
 	Cards display basic information about each band contact and venue
+	Cards are sorted by the times connected
 
 	Each Venue, City, and Contact card has a connect button
 	Clicking the connect button will open an email to the primary contact for the card
+	On the backend a counter of the connection count is incremented 
 ```
 #### On the new show page
 ```
@@ -70,17 +72,17 @@
 
 ## Wireframes
 ### Login
-![alt text](./wireframes/login.jpg "Login Wireframe")
+![alt text](./public/wireframes/login.jpg "Login Wireframe")
 ### Home
-![alt text](./wireframes/home.jpg "Home Wireframe")
+![alt text](./public/wireframes/home.jpg "Home Wireframe")
 ### City Show
-![alt text](./wireframes/city-show.jpg "city-show Wireframe")
+![alt text](./public/wireframes/city-show.jpg "city-show Wireframe")
 ### Site Map 1
-![alt text](./wireframes/site-map-1.jpg "site-map-1 Wireframe")
+![alt text](./public/wireframes/site-map-1.jpg "site-map-1 Wireframe")
 ### Site Map 2
-![alt text](./wireframes/site-map-2.jpg "site-map-2 Wireframe")
+![alt text](./public/wireframes/site-map-2.jpg "site-map-2 Wireframe")
 ### Site Map 3
-![alt text](./wireframes/site-map-3.jpg "site-map-3 Wireframe")
+![alt text](./public/wireframes/site-map-3.jpg "site-map-3 Wireframe")
 
 
 
