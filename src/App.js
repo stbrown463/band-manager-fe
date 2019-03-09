@@ -11,12 +11,18 @@ class App extends Component {
       user_id: '',
       username: '',
       password: '',
-      confirm_password: '',
+      verify_password: '',
       name: '',
+      email: '',
+      bio: '',
+      city: '',
+      state: '',
       band_id: '',
       band_name: ''
     }
   }
+
+
 
   handleChange = (e) => {
     console.log('handlechange is called');
@@ -26,6 +32,7 @@ class App extends Component {
   }
 
   handleRegister = (e) => {
+    e.preventDefault()
     console.log("called handleRegiester");
   }
 
@@ -45,7 +52,17 @@ class App extends Component {
            handleLogin={this.handleLogin}
            handleChange={this.handleChange}
            username={this.state.username}
-           password={this.state.password}  />} />
+           password={this.state.password}
+           verify_password={this.state.verify_password}
+           email={this.state.email}
+           name={this.state.name}
+           bio={this.state.bio}
+           city={this.state.city}
+           state={this.state.state}  />} />
+
+
+
+
       </div>
     );
   }
