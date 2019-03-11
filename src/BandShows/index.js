@@ -1,24 +1,19 @@
 import React from 'react'
 
-const BandShows = ({shows, band_name}) => {
+const BandShows = ({shows, band_name, setShow}) => {
 
-	const dinner = Math.floor(Math.random() * 2)
-	console.log(dinner, "dinner vote");
 	
 	console.log(shows);
-	const showList = shows.map((show) => {
+	const showList = shows.map((show, i) => {
 		const date = (new Date(show.date)).toLocaleString("en-US")
-	
-
-
-
 
     return (
-			<div className="card" key="show.id">
-				<h3>{band_name} @ {show.venue_name}</h3>
+			<div className="card" key={show.id}>
+				<h3>{show.venue_name}</h3>
 				<p>
 					{date}<br/>
-					{show.city}, {show.state}
+					{show.city}, {show.state}<br /><br />
+					<button onClick={setShow.bind(null, i)}>more details</button>
 				</p>
 			</div>
     )

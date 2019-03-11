@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import AuthContainer from './AuthContainer'
 import BandSelect from './BandSelect'
 import Navigation from './Navigation'
+import ShowView from './ShowView'
 import Home from './Home'
 import './App.css';
 require('dotenv').config()
@@ -23,7 +24,27 @@ class App extends Component {
       state: '',
       bands: [],
       band_id: '',
-      band_name: ''
+      band_name: '',
+
+
+      shows: [],
+
+
+
+      bandshow_id: '',
+      city: '',
+      date: '',
+      doors: '',
+      email: '',
+      id: '',
+      loadIn: '',
+      notes: '',
+      poster_url: '',
+      state: '',
+      streetAddress: '',
+      venue_id: '',
+      venue_name: '',
+      zipcode: ''
     }
   }
 
@@ -132,7 +153,8 @@ class App extends Component {
         state: '',
         bands: [],
         band_id: '',
-        band_name: ''
+        band_name: '',
+
       })
 
     } catch (err) {
@@ -183,6 +205,33 @@ class App extends Component {
     this.props.history.push('/home')
   }
 
+  getShowsOfBand = async () => {
+    console.log('get shows was called');
+    console.log(this.props.band_id, "band_id in get shows of band");
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/${this.state.band_id}`)
+
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+
+      const parsedResponse = await response.json()
+      console.log(parsedResponse);
+
+      this.setState({
+        shows: [...parsedResponse]
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  setShow = (showindex, e) => {
+    console.log('setShow was called');
+    console.log(showindex, "show index");
+  }
+
 
 
   render() {
@@ -213,6 +262,14 @@ class App extends Component {
               username={this.state.username}
               user_id={this.state.user_id}  />} />
             <Route exact path='/home' render={() => <Home 
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}
+              getShowsOfBand={this.getShowsOfBand}
+              shows={this.state.shows}
+              setShow={this.setShow}/>} />
+            <Route exact path='/show' render={() => <ShowView 
               username={this.state.username}
               user_id={this.state.user_id}
               band_id={this.state.band_id}

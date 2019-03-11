@@ -36,11 +36,16 @@ footer{
   align-items: center;
   justify-content: center;
   border: 2px solid black;
+  padding: 0 3px;
 }
 
 .card {
   width: 20vw;
-  height: 180px;
+  height: 184px;
   background-color: cadetblue;
   border: 2px solid black;
+  margin: 0 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
