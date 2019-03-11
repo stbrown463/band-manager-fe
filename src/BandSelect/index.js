@@ -1,20 +1,34 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class BandSelect extends Component {
-	componentDidMount() {
-    console.log('welcome to my friggen app');
-    this.props.getBandsOfUser()
-  }
+const BandSelect = ({bands, setBand, band_id, band_name}) => {
+	console.log(bands);
 
-	render() {
-		console.log(this.props)
-		return(
-			<select>
-				<option>Band</option>
+  let bandList = bands.map((band) => {
+    return (
+        <option key={band.band_id} value={[band.band_id, band.band_name]}>{band.band_name}</option>
+    )
+  })
+
+
+	return(
+		<div>
+			<h2>Select Band</h2>
+
+			<select onChange={setBand.bind(null)}>
+				<option value={[null, '']}>No Band</option>
+				{bandList}
 			</select>
+			<button>Select</button>
 
-		)
-	}
+		</div>
+	)
 }
 
 export default BandSelect
+
+// <select onChange={(e) => this.setState({ value: e.target.value })}>
+//     <option value="PNG">PNG Image</option>
+//     <option value="JPEG">JPEG Image</option>
+//     <option value="PDF">PDF Document</option>
+//     <option value="SVG">SVG Vector Image</option>
+//  </select>

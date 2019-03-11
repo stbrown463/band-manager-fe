@@ -32,7 +32,7 @@ class AuthContainer extends Component {
 		return (
 			<div>
 				<h2>This is auth container</h2>
-				{this.state.showRegister ? <Login 
+				{!this.state.showRegister ? <Login 
 					handleLogin={this.props.handleLogin} 
 					handleChange={this.props.handleChange} 
 					username={this.props.username}

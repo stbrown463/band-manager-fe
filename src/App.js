@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import AuthContainer from './AuthContainer'
 import BandSelect from './BandSelect'
 import Navigation from './Navigation'
@@ -20,6 +20,7 @@ class App extends Component {
       bio: '',
       city: '',
       state: '',
+      bands: [],
       band_id: '',
       band_name: ''
     }
@@ -50,7 +51,7 @@ class App extends Component {
       })
 
       const parsedResponse = await response.json()
-      console.log(parsedResponse);
+      // console.log(parsedResponse);
 
       if (response.ok) {
         this.setState({
@@ -86,7 +87,7 @@ class App extends Component {
       })
 
       const parsedResponse = await response.json()
-      console.log(parsedResponse);
+      // console.log(parsedResponse);
 
       if (response.ok) {
         this.setState({
@@ -99,7 +100,8 @@ class App extends Component {
           password: '',
           verify_password: ''
         });
-        console.log(this.state);
+        // console.log(this.state);
+        this.getBandsOfUser()
         this.props.history.push('/bandselect')
       }
 
@@ -117,6 +119,21 @@ class App extends Component {
       const parsedResponse = await response.json()
       console.log(parsedResponse);
 
+      this.setState({
+        user_id: '',
+        username: '',
+        password: '',
+        verify_password: '',
+        name: '',
+        email: '',
+        bio: '',
+        city: '',
+        state: '',
+        bands: [],
+        band_id: '',
+        band_name: ''
+      })
+
     } catch (err) {
       console.log(err)
     }
@@ -128,14 +145,13 @@ class App extends Component {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/bands/${this.state.user_id}`)
 
       const parsedResponse = await response.json()
-      console.log(parsedResponse);
+      // console.log(parsedResponse);
 
       if (response.ok) {
-        return parsedResponse
-      // this.setState({
-      //   band_id: parsedResponse.band_id
-      //   band_name: parsedResponse.band_name
-      // })
+        this.setState({
+          bands: [...parsedResponse]
+        })
+        // return parsedResponse
     }
 
 
@@ -144,16 +160,28 @@ class App extends Component {
     }
   }
 
+  setBand = (e) => {
+    e.preventDefault()
+    const bandData = e.target.value.split(",");
+    console.log(bandData, "== bandData");
+    console.log(Number(bandData[0]), "== band Id");
+    console.log(bandData[1], "== band_name")
+    this.setState({
+      band_id: Number(bandData[0]),
+      band_name: bandData[1]
+    })
+  }
+
 
 
   render() {
-    console.log("App props: ", this);
+    console.log(this.state);
     return (
       <div className="App">
         <React.Fragment>
           <main>
             <h1>Welcome to my Friggen App</h1>
-            <switch>
+            <Switch>
               <Route exact path='/' render={() => <AuthContainer 
                  handleRegister={this.handleRegister} 
                  handleLogin={this.handleLogin}
@@ -167,8 +195,11 @@ class App extends Component {
                  city={this.state.city}
                  state={this.state.state}  />} />
               <Route exact path='/bandselect' render={() => <BandSelect 
-                getBandsOfUser={this.getBandsOfUser}/>} />
-            </switch>
+                bands={this.state.bands}
+                setBand={this.setBand}
+                band_id={this.state.band_id}
+                band_name={this.state.band_name}/>} />
+            </Switch>
           </main>
           <footer>
             <Navigation logout={this.logout}/>
