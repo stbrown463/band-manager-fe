@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import AuthContainer from './AuthContainer'
 import BandSelect from './BandSelect'
+import Navigation from './Navigation'
 import './App.css';
 require('dotenv').config()
 
@@ -108,6 +109,19 @@ class App extends Component {
 
   }
 
+  logout = async (e) => {
+    console.log('logout was called');
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/users/logout`)
+
+      const parsedResponse = await response.json()
+      console.log(parsedResponse);
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   getBandsOfUser = async () => {
     console.log("getBandsOfUser Was Called");
     try {
@@ -116,12 +130,13 @@ class App extends Component {
       const parsedResponse = await response.json()
       console.log(parsedResponse);
 
-       // if (response.ok) {
-       //  this.setState({
-       //    band_id: parsedResponse.band_id
-       //    band_name: parsedResponse.band_name
-       //  })
-       // }
+      if (response.ok) {
+        return parsedResponse
+      // this.setState({
+      //   band_id: parsedResponse.band_id
+      //   band_name: parsedResponse.band_name
+      // })
+    }
 
 
     } catch (err) {
@@ -135,21 +150,30 @@ class App extends Component {
     console.log("App props: ", this);
     return (
       <div className="App">
-        <h1>Welcome to my Friggen App</h1>
-        { !this.state.user_id ? <Route exact path='/' render={() => <AuthContainer 
-           handleRegister={this.handleRegister} 
-           handleLogin={this.handleLogin}
-           handleChange={this.handleChange}
-           username={this.state.username}
-           password={this.state.password}
-           verify_password={this.state.verify_password}
-           email={this.state.email}
-           name={this.state.name}
-           bio={this.state.bio}
-           city={this.state.city}
-           state={this.state.state}  />} /> : <Redirect to="/bandselect"/> }
-        <Route exact path='/bandselect' render={() => <BandSelect 
-          getBandsOfUser={this.getBandsOfUser}/>} />
+        <React.Fragment>
+          <main>
+            <h1>Welcome to my Friggen App</h1>
+            <switch>
+              <Route exact path='/' render={() => <AuthContainer 
+                 handleRegister={this.handleRegister} 
+                 handleLogin={this.handleLogin}
+                 handleChange={this.handleChange}
+                 username={this.state.username}
+                 password={this.state.password}
+                 verify_password={this.state.verify_password}
+                 email={this.state.email}
+                 name={this.state.name}
+                 bio={this.state.bio}
+                 city={this.state.city}
+                 state={this.state.state}  />} />
+              <Route exact path='/bandselect' render={() => <BandSelect 
+                getBandsOfUser={this.getBandsOfUser}/>} />
+            </switch>
+          </main>
+          <footer>
+            <Navigation logout={this.logout}/>
+          </footer>
+        </React.Fragment>
 
 
 
@@ -159,4 +183,18 @@ class App extends Component {
   }
 }
 
-export default App;
+
+              // { !this.state.user_id ? <Route exact path='/' render={() => <AuthContainer 
+              //    handleRegister={this.handleRegister} 
+              //    handleLogin={this.handleLogin}
+              //    handleChange={this.handleChange}
+              //    username={this.state.username}
+              //    password={this.state.password}
+              //    verify_password={this.state.verify_password}
+              //    email={this.state.email}
+              //    name={this.state.name}
+              //    bio={this.state.bio}
+              //    city={this.state.city}
+              //    state={this.state.state}  />} /> : <Redirect to="/bandselect"/> }
+
+export default withRouter(App);
