@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BandSearchResults from '../BandSearchResults'
 
 class	BandSearch extends Component {
 	constructor () {
@@ -7,6 +8,7 @@ class	BandSearch extends Component {
 		this.state = {
 			name: '',
 			city: '',
+			bands: []
 		}
 	}
 
@@ -26,12 +28,41 @@ class	BandSearch extends Component {
       }
 
       const parsedResponse = await response.json()
-      console.log(parsedResponse);
+      
+      this.setState({
+      	bands: [...parsedResponse]
+      })
 
 		} catch (err) {
 			console.log(err)
 		}
 	}
+
+	addBandMember = async (band_id, e) => {
+  	try {
+  		console.log('hitting add user as member of band');
+  		console.log(band_id, "this is band_id in addBandMember");
+  		console.log(this.props.user_id, "this is user_id in addBandMember");
+  		const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/bands/member/new`,{
+        method: 'POST',
+        body: JSON.stringify({
+        	user_id: this.props.user_id,
+        	band_id: band_id
+        }),
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+  		})
+      if (!memberResponse.ok) {
+        throw Error(memberResponse.statusText)
+      }
+      const parsedMember = await memberResponse.json()
+      console.log(parsedMember);
+  	} catch (err) {
+  		console.log(err)
+  	}
+  }
 
 	render () {
 		return (
@@ -42,6 +73,9 @@ class	BandSearch extends Component {
 					<input type="text" name="city" placeholder="Band city..." value={this.state.city} onChange={this.handleChange}/>
 					<button>Search</button>
 				</form>
+				{this.state.bands !== null ? <BandSearchResults 
+					bands={this.state.bands}
+					addBandMember={this.addBandMember} /> : null}
 			</div>
 		)
 	}
