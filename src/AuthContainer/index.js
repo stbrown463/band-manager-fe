@@ -48,7 +48,7 @@ class AuthContainer extends Component {
 					bio={this.props.bio}
 					city={this.props.city}
 					state={this.props.state} /> }
-				<button onClick={this.showRegister}>{this.state.showRegister ? "Show Regiser" : "Show Login" }</button> 
+				<button onClick={this.showRegister}>{this.state.showRegister ? "Show Login" : "Show Register" }</button> 
 			</div>
 
 

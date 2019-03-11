@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import AuthContainer from './AuthContainer'
 import BandSelect from './BandSelect'
 import Navigation from './Navigation'
+import Home from './Home'
 import './App.css';
 require('dotenv').config()
 
@@ -162,14 +163,19 @@ class App extends Component {
 
   setBand = (e) => {
     e.preventDefault()
-    const bandData = e.target.value.split(",");
-    console.log(bandData, "== bandData");
-    console.log(Number(bandData[0]), "== band Id");
-    console.log(bandData[1], "== band_name")
-    this.setState({
-      band_id: Number(bandData[0]),
-      band_name: bandData[1]
-    })
+    if (e.target.value) {
+      const bandData = e.target.value.split(",");
+      this.setState({
+        band_id: Number(bandData[0]),
+        band_name: bandData[1]
+      })
+    }
+  }
+
+  goHome = (e) => {
+    e.preventDefault()
+    console.log('goHome was called');
+    this.props.history.push('/home')
   }
 
 
@@ -177,39 +183,39 @@ class App extends Component {
   render() {
     console.log(this.state);
     return (
-      <div className="App">
-        <React.Fragment>
-          <main>
-            <h1>Welcome to my Friggen App</h1>
-            <Switch>
-              <Route exact path='/' render={() => <AuthContainer 
-                 handleRegister={this.handleRegister} 
-                 handleLogin={this.handleLogin}
-                 handleChange={this.handleChange}
-                 username={this.state.username}
-                 password={this.state.password}
-                 verify_password={this.state.verify_password}
-                 email={this.state.email}
-                 name={this.state.name}
-                 bio={this.state.bio}
-                 city={this.state.city}
-                 state={this.state.state}  />} />
-              <Route exact path='/bandselect' render={() => <BandSelect 
-                bands={this.state.bands}
-                setBand={this.setBand}
-                band_id={this.state.band_id}
-                band_name={this.state.band_name}/>} />
-            </Switch>
-          </main>
-          <footer>
-            <Navigation logout={this.logout}/>
-          </footer>
-        </React.Fragment>
-
-
-
-
-      </div>
+      <React.Fragment>
+        <main>
+          <h1>Welcome to my Friggen App</h1>
+          <Switch>
+            <Route exact path='/' render={() => <AuthContainer 
+               handleRegister={this.handleRegister} 
+               handleLogin={this.handleLogin}
+               handleChange={this.handleChange}
+               username={this.state.username}
+               password={this.state.password}
+               verify_password={this.state.verify_password}
+               email={this.state.email}
+               name={this.state.name}
+               bio={this.state.bio}
+               city={this.state.city}
+               state={this.state.state}  />} />
+            <Route exact path='/bandselect' render={() => <BandSelect 
+              bands={this.state.bands}
+              setBand={this.setBand}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}
+              goHome={this.goHome}  />} />
+            <Route exact path='/home' render={() => <Home 
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}/>} />
+          </Switch>
+        </main>
+        <footer>
+          <Navigation logout={this.logout}/>
+        </footer>
+      </React.Fragment>
     );
   }
 }

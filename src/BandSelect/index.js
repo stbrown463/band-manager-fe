@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BandSelect = ({bands, setBand, band_id, band_name}) => {
+const BandSelect = ({bands, setBand, band_id, band_name, goHome}) => {
 	console.log(bands);
 
   let bandList = bands.map((band) => {
@@ -15,10 +15,10 @@ const BandSelect = ({bands, setBand, band_id, band_name}) => {
 			<h2>Select Band</h2>
 
 			<select onChange={setBand.bind(null)}>
-				<option value={[null, '']}>No Band</option>
+				<option value={[null]}>No Band</option>
 				{bandList}
 			</select>
-			<button>Select</button>
+			<button onClick={goHome.bind(null)}>Select</button>
 
 		</div>
 	)
