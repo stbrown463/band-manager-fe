@@ -63,7 +63,7 @@ class BandAdd extends Component {
 					if (!memberResponse.ok) {
 					  throw Error(memberResponse.statusText)
 					}
-					const parsedMember = await response.json()
+					const parsedMember = await memberResponse.json()
 					console.log(parsedMember);
 
 				} catch (err) {
