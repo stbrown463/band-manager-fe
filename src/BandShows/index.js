@@ -1,16 +1,23 @@
 import React from 'react'
 
 const BandShows = ({shows, band_name}) => {
+
+	const dinner = Math.floor(Math.random() * 2)
+	console.log(dinner, "dinner vote");
 	
 	console.log(shows);
 	const showList = shows.map((show) => {
-		console.log(band_name);
-		console.log(show.venue_name);
+		const date = (new Date(show.date)).toLocaleString("en-US")
+	
+
+
+
+
     return (
 			<div className="card" key="show.id">
 				<h3>{band_name} @ {show.venue_name}</h3>
 				<p>
-					date: {show.date}<br/>
+					{date}<br/>
 					{show.city}, {show.state}
 				</p>
 			</div>
