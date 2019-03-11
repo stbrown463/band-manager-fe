@@ -1,7 +1,8 @@
 import React from 'react'
 import BandAdd from '../BandAdd'
+import BandSearch from '../BandSearch'
 
-const BandSelect = ({bands, setBand, band_id, band_name, goHome}) => {
+const BandSelect = ({bands, setBand, band_id, band_name, goHome, user_id, }) => {
 	console.log(bands);
 
   let bandList = bands.map((band) => {
@@ -20,8 +21,8 @@ const BandSelect = ({bands, setBand, band_id, band_name, goHome}) => {
 				{bandList}
 			</select>
 			<button onClick={goHome.bind(null)}>Select</button>
-			<h3>Don't see your band?  Add it here</h3>
-			<BandAdd />
+			<BandSearch user_id={user_id}/>
+			<BandAdd user_id={user_id}/>
 
 		</div>
 	)

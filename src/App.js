@@ -209,7 +209,9 @@ class App extends Component {
               setBand={this.setBand}
               band_id={this.state.band_id}
               band_name={this.state.band_name}
-              goHome={this.goHome}  />} />
+              goHome={this.goHome}
+              username={this.state.username}
+              user_id={this.state.user_id}  />} />
             <Route exact path='/home' render={() => <Home 
               username={this.state.username}
               user_id={this.state.user_id}
@@ -225,18 +227,5 @@ class App extends Component {
   }
 }
 
-
-              // { !this.state.user_id ? <Route exact path='/' render={() => <AuthContainer 
-              //    handleRegister={this.handleRegister} 
-              //    handleLogin={this.handleLogin}
-              //    handleChange={this.handleChange}
-              //    username={this.state.username}
-              //    password={this.state.password}
-              //    verify_password={this.state.verify_password}
-              //    email={this.state.email}
-              //    name={this.state.name}
-              //    bio={this.state.bio}
-              //    city={this.state.city}
-              //    state={this.state.state}  />} /> : <Redirect to="/bandselect"/> }
 
 export default withRouter(App);
