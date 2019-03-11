@@ -1,4 +1,5 @@
 import React from 'react'
+import BandAdd from '../BandAdd'
 
 const BandSelect = ({bands, setBand, band_id, band_name, goHome}) => {
 	console.log(bands);
@@ -19,6 +20,8 @@ const BandSelect = ({bands, setBand, band_id, band_name, goHome}) => {
 				{bandList}
 			</select>
 			<button onClick={goHome.bind(null)}>Select</button>
+			<h3>Don't see your band?  Add it here</h3>
+			<BandAdd />
 
 		</div>
 	)

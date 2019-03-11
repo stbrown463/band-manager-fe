@@ -163,11 +163,16 @@ class App extends Component {
 
   setBand = (e) => {
     e.preventDefault()
-    if (e.target.value) {
+    if (e.target.value != null) {
       const bandData = e.target.value.split(",");
       this.setState({
         band_id: Number(bandData[0]),
         band_name: bandData[1]
+      })
+    } else {
+      this.setState({
+        band_id: null,
+        band_name: ''
       })
     }
   }
