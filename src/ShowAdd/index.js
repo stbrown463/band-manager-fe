@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import VenueSearch from '../VenueSearch'
+import { DateTime } from "luxon";
 
 class ShowAdd extends Component {
 	constructor() {
@@ -60,7 +61,31 @@ class ShowAdd extends Component {
 		// userBandPlaying: false
 		// venue: ""
 
-  	//Create Band
+  	// convert date to local timezone
+  	const date = DateTime.fromISO(this.state.date).toString();
+  	const loadIn = DateTime.fromISO(this.state.loadIn).toString();
+  	const doors = DateTime.fromISO(this.state.doors).toString();
+  	this.setState({
+  		date: date,
+  		loadIn: loadIn,
+  		doors: doors
+  	})
+  	// console.log(date);
+  	// console.log(date.zoneName);
+  	// console.log(date.toString());
+
+		// local.zoneName; //=> 'America/New_York'
+		// local.toString(); //=> '2017-05-15T09:10:23.000-04:00'
+
+		// var iso = DateTime.fromISO("2017-05-15T09:10:23");
+
+		// iso.zoneName; //=> 'America/New_York'
+		// iso.toString(); //=> '2017-05-15T09:10:23.000-04:00'
+
+
+
+
+
   	try {
   		const response = await fetch(`${process.env.REACT_APP_API_URL}/shows/new`, {
         method: 'POST',

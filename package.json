@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "dotenv": "^6.2.0",
+    "luxon": "^1.11.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-pure-lifecycle": "^3.0.0",
