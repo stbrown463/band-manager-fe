@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import AuthContainer from './AuthContainer'
 import BandSelect from './BandSelect'
 import BandAdd from './BandAdd'
+import ShowAdd from './ShowAdd'
 import Navigation from './Navigation'
 import ShowView from './ShowView'
 import NewContainer from './NewContainer'
@@ -317,6 +318,11 @@ class App extends Component {
               band_id={this.state.band_id}
               band_name={this.state.band_name}
               getBandsOfUser={this.getBandsOfUser}/>}/>
+            <Route exact path='/show/add' render={() => <ShowAdd
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}/>}/>
           </Switch>
         </main>
         <footer>

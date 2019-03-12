@@ -10,14 +10,11 @@ class NewContainer extends Component {
 				<div className="row">
 					<div className="card">
 						<h2>Band</h2>
-						<Link to={'/band/add'} id='new'
-						  username={this.props.username}
-              user_id={this.props.user_id}
-              band_id={this.props.band_id}
-              band_name={this.props.band_name}>Add</Link>
+						<Link to={'/band/add'} id='newband'>Add</Link>
 					</div>
 					<div className="card">
 						<h2>Show</h2>
+						<Link to={'/show/add'} id='newshow'>Add</Link>
 					</div>
 				</div>
 				<div className="row">
