@@ -20,6 +20,7 @@ class NewContainer extends Component {
 				<div className="row">
 					<div className="card">
 						<h2>Venue</h2>
+						<Link to={'/venue/add'} id='newshow'>Add</Link>
 					</div>
 					<div className="card">
 						<h2>Contact</h2>

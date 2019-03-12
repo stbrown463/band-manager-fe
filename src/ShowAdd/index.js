@@ -119,10 +119,10 @@ class ShowAdd extends Component {
 					</label>
 					<input name="notes" type="text" value={this.state.notes} placeholder="notes" onChange={this.handleChange}/><br/>
 					<input name="poster_url" type="url" value={this.state.poster_url} placeholder="poster_url" onChange={this.handleChange}/><br/>
-					<label>
+					{this.props.band_name ? <label>
 						Is {this.props.band_name} playing this show?
-						<input name="userIsMember" type="checkbox" value={this.state.userIsMember} placeholder="userIsMember" onChange={this.handleChange}/><br/>
-					</label>
+						<input name="userIsMember" type="checkbox" value={this.state.userIsMember} placeholder="userIsMember" onChange={this.handleChange}/><br/> 
+					</label> : null}
 					<button type="submit">Add Show</button>
 				</form>
 			</div>
