@@ -1,10 +1,9 @@
 import React from 'react'
+import { withRouter, Link } from 'react-router-dom'
 
 
-const BandsOfShow = ({bands}) => {
-
+const BandsOfShow = ({bands, setBandToView}) => {
 	const showList = bands.map((band, i) => {
-
     return (
 			<div className="card" key={band.id}>
 				<h3>{band.band_name}</h3>
@@ -13,12 +12,12 @@ const BandsOfShow = ({bands}) => {
 					{band.band_city}, {band.band_state}<br /><br />
 					{band.email}<br/>
 					{band.band_website}<br />
-					<button>more details</button>
+					<Link to={'/band/view'} id='bandView' onClick={setBandToView.bind(null, band.id)}>More Details</Link>
 				</p>
 			</div>
     )
   })
-
+// Data from bands props //
 // band_id: "1"
 // band_img_url: "sam.jpg"
 // band_name: "laverne"
@@ -37,4 +36,4 @@ const BandsOfShow = ({bands}) => {
 	)
 }
 
-export default BandsOfShow
+export default withRouter(BandsOfShow)

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import VenueSearch from '../VenueSearch'
-import { DateTime } from "luxon";
 
 class ShowAdd extends Component {
 	constructor() {
@@ -68,7 +67,7 @@ class ShowAdd extends Component {
       const parsedResponse = await response.json()
        console.log(parsedResponse);
 
-      // Add user as member of band
+      // Add user's band to show
       if (this.state.userBandPlaying) {
 				try {
 					console.log('hitting add user as member of band');

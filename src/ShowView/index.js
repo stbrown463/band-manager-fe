@@ -94,7 +94,8 @@ class ShowView extends Component {
 				</div>
 				<BandsOfShow 
 					bands={this.state.bands}
-					user_id={this.props.user_id}/>
+					user_id={this.props.user_id}
+					setBandToView={this.props.setBandToView}/>
 				<BandSearch 
 					user_id={this.props.user_id}
 					addBandToShow={this.addBandToShow}/>

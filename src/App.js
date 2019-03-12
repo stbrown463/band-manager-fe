@@ -9,6 +9,7 @@ import ContactAdd from './ContactAdd'
 import Navigation from './Navigation'
 import ShowView from './ShowView'
 import NewContainer from './NewContainer'
+import BandView from './BandView'
 import Home from './Home'
 import './App.css';
 require('dotenv').config()
@@ -49,7 +50,10 @@ class App extends Component {
       streetAddress: '',
       venue_id: '',
       venue_name: '',
-      zipcode: ''
+      zipcode: '',
+
+
+      bandToView: {}
     }
   }
 
@@ -253,6 +257,45 @@ class App extends Component {
     this.props.history.push('/show/view')
   }
 
+  setBandToView = async (band_id, e) => {
+    console.log('setBandToView was called');
+    console.log(band_id, "band_id");
+    try {
+      const response = await fetch (`${process.env.REACT_APP_API_URL}/bands/${band_id}`)
+
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+
+      const parsedResponse = await response.json()
+      console.log(parsedResponse);
+
+      // parsed response looks like this
+      // city: "Chicago"
+      // email: "gb@gb.com"
+      // id: 2
+      // img_url: "gb.jpg"
+      // name: "Good Brother"
+      // state: "IL"
+      // website: "gb.com"
+      this.setState({
+        bandToView: {
+          city: parsedResponse.city,
+          email: parsedResponse.email,
+          id: parsedResponse.id,
+          img_url: parsedResponse.img_url,
+          name: parsedResponse.name,
+          state: parsedResponse.state,
+          website: parsedResponse.website,
+        }
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
 
 
   render() {
@@ -308,7 +351,17 @@ class App extends Component {
               streetAddress={this.state.streetAddress}
               venue_id={this.state.venue_id}
               venue_name={this.state.venue_name}
-              zipcode={this.state.zipcode}/>} />
+              zipcode={this.state.zipcode}
+              setBandToView={this.setBandToView}/>} />
+            <Route exact path='/band/view' render={() => <BandView
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}
+              getShowsOfBand={this.getShowsOfBand}
+              shows={this.state.shows}
+              setShow={this.setShow}
+              bandToView={this.state.bandToView}/>} />
             <Route exact path='/new' render={() => <NewContainer
               username={this.state.username}
               user_id={this.state.user_id}
