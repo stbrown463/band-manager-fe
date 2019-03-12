@@ -70,6 +70,7 @@ class BandAdd extends Component {
 					console.log(err)
 				}
 			}
+			this.props.getBandsOfUser()
   	} catch (err) {
   		console.log(err)
   	}

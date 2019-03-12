@@ -6,6 +6,7 @@ render() {
     return (
       <div id='nav-bar'>
     		<Link to={'/home'} id='home'>Home</Link>
+    		<Link to={'/new'} id='new'>+</Link>
         <Link to={'/bandselect'} id='bandselect'>bandselect</Link>
         <Link to={'/'} id="logout" onClick={this.props.logout.bind(null)}>Logout</Link>
       </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BandShows from '../BandShows'
+import { withRouter, Link } from 'react-router-dom'
 
 class Home extends Component {
 	
@@ -19,9 +20,14 @@ class Home extends Component {
 					band_id={this.props.band_id}
 					shows={this.props.shows}
 					setShow={this.props.setShow}/>
+				<Link to={'/new'} id="new" 
+					username={this.props.username}
+					user_id={this.props.user_id}
+					band_name={this.props.band_name}
+					band_id={this.props.band_id}>Add a Show</Link>
 			</div>
 		)
 	}
 }
 
-export default Home
+export default withRouter(Home)

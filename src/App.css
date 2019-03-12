@@ -44,8 +44,15 @@ footer{
   height: 184px;
   background-color: cadetblue;
   border: 2px solid black;
-  margin: 0 3px;
+  margin: 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+

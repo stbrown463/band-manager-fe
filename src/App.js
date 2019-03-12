@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import AuthContainer from './AuthContainer'
 import BandSelect from './BandSelect'
+import BandAdd from './BandAdd'
 import Navigation from './Navigation'
 import ShowView from './ShowView'
+import NewContainer from './NewContainer'
 import Home from './Home'
 import './App.css';
 require('dotenv').config()
@@ -175,9 +177,7 @@ class App extends Component {
           bands: [...parsedResponse]
         })
         // return parsedResponse
-    }
-
-
+      }
     } catch (err) {
       console.log(err)
     }
@@ -277,7 +277,8 @@ class App extends Component {
               band_name={this.state.band_name}
               goHome={this.goHome}
               username={this.state.username}
-              user_id={this.state.user_id}  />} />
+              user_id={this.state.user_id}
+              getBandsOfUser={this.getBandsOfUser}  />} />
             <Route exact path='/home' render={() => <Home 
               username={this.state.username}
               user_id={this.state.user_id}
@@ -305,6 +306,17 @@ class App extends Component {
               venue_id={this.state.venue_id}
               venue_name={this.state.venue_name}
               zipcode={this.state.zipcode}/>} />
+            <Route exact path='/new' render={() => <NewContainer
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}/>} />
+            <Route exact path='/band/add' render={() => <BandAdd
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}
+              getBandsOfUser={this.getBandsOfUser}/>}/>
           </Switch>
         </main>
         <footer>
