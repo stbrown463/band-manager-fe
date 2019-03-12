@@ -1,5 +1,4 @@
 import React from 'react'
-import { DateTime } from "luxon";
 
 const BandShows = ({shows, band_name, setShow}) => {
 
@@ -7,19 +6,8 @@ const BandShows = ({shows, band_name, setShow}) => {
 	console.log(shows);
 	const showList = shows.map((show, i) => {
 
-		// var local = DateTime.local(2017, 05, 15, 09, 10, 23);
-
-		// local.zoneName; //=> 'America/New_York'
-		// local.toString(); //=> '2017-05-15T09:10:23.000-04:00'
-
-		// var iso = DateTime.fromISO("2017-05-15T09:10:23");
-
-		// iso.zoneName; //=> 'America/New_York'
-		// iso.toString(); //=> '2017-05-15T09:10:23.000-04:00'
-
 
 		const date = (new Date(show.date)).toLocaleString("en-US", { timeZone: 'UTC' })
-		// const date = DateTime.fromISO(show.date)
 
     return (
 			<div className="card" key={show.id}>

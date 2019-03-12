@@ -20,7 +20,9 @@ const BandSelect = ({bands, setBand, band_id, band_name, goHome, user_id, getBan
 				{bandList}
 			</select>
 			<button onClick={goHome.bind(null)}>Select</button>
-			<BandSearch user_id={user_id}/>
+			<BandSearch 
+				user_id={user_id}
+				addBandToShow={false}/>
 			<BandAdd user_id={user_id}
 			getBandsOfUser={getBandsOfUser}/>
 		</div>
@@ -28,10 +30,3 @@ const BandSelect = ({bands, setBand, band_id, band_name, goHome, user_id, getBan
 }
 
 export default BandSelect
-
-// <select onChange={(e) => this.setState({ value: e.target.value })}>
-//     <option value="PNG">PNG Image</option>
-//     <option value="JPEG">JPEG Image</option>
-//     <option value="PDF">PDF Document</option>
-//     <option value="SVG">SVG Vector Image</option>
-//  </select>

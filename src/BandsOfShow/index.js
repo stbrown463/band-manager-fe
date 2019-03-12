@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const BandsOfShow = ({bands}) => {
 
 	const showList = bands.map((band, i) => {
@@ -28,7 +29,7 @@ const BandsOfShow = ({bands}) => {
 
 	return (
 		<div className="center">
-			<h3>Bands</h3>
+			<h2>Bands</h2>
 			<div className="card-container">
 				{showList}
 			</div>

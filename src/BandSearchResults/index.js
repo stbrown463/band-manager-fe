@@ -1,12 +1,13 @@
 import React from 'react'
 
-const BandSearchResults = ({bands, addBandMember}) => {
+const BandSearchResults = ({bands, addBandMember, addBandToShow}) => {
 
   const bandList = bands.map((band) => {
     return (
         <li key={band.id} value={[band.id, band.name]}>
 	        {band.name}, {band.city}
-	        <button onClick={addBandMember.bind(null, band.id)}>I'm in this band</button>
+	        {!addBandToShow ? <button onClick={addBandMember.bind(null, band.id)}>I'm in this band</button> :
+	        <button onClick={addBandToShow.bind(null, band.id)}>Add to Show</button>}
         </li>
     )
   })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BandsOfShow from '../BandsOfShow'
+import BandSearch from '../BandSearch'
 
 
 
@@ -41,6 +42,32 @@ class ShowView extends Component {
     }
 	}
 
+  addBandToShow = async (band_id, e) => {
+  	console.log('add band to show was called');
+		try {
+			const response = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/new`,{
+			  method: 'POST',
+			  body: JSON.stringify({
+			  	band_id: band_id,
+			  	show_id: this.props.show_id,
+			  }),
+			  credentials: 'include',
+			  headers: {
+			    'Content-Type': 'application/json'
+			  }
+			})
+			if (!response.ok) {
+			  throw Error(response.statusText)
+			}
+			const parsedResponse = await response.json()
+			console.log(parsedResponse);
+			this.getBandsOfShow()
+
+		} catch (err) {
+			console.log(err)
+		}
+  }
+
 
 
 
@@ -50,21 +77,27 @@ class ShowView extends Component {
 		return (
 			<div className="center">
 				<img src={this.props.poster_url} alt={this.props.date} />
-				<h1>{this.props.venue_name}</h1>
-				<h2>{new Date(this.props.date).toLocaleDateString("en-US", { timeZone: 'UTC' })}</h2>
-				<p>
-					{this.props.streetAddress}<br />
-					{this.props.city}, {this.props.state}, {this.props.zipcode}<br />
-				</p>
-				<p>
-					Load In: {new Date(this.props.loadIn).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
-					Doors: {new Date(this.props.doors).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
-					Show: {new Date(this.props.date).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
-				</p>
-				<p>
-					Notes: {this.props.notes}
-				</p>
-				<BandsOfShow bands={this.state.bands}/>
+				<h1>{this.props.venue_name} - {new Date(this.props.date).toLocaleDateString("en-US", { timeZone: 'UTC' })}</h1>
+				<div className="row-around">
+					<p>
+						{this.props.streetAddress}<br />
+						{this.props.city}, {this.props.state}, {this.props.zipcode}<br />
+					</p>
+					<p>
+						Load In: {new Date(this.props.loadIn).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
+						Doors: {new Date(this.props.doors).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
+						Show: {new Date(this.props.date).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
+					</p>
+					<p>
+						Notes: {this.props.notes}
+					</p>
+				</div>
+				<BandsOfShow 
+					bands={this.state.bands}
+					user_id={this.props.user_id}/>
+				<BandSearch 
+					user_id={this.props.user_id}
+					addBandToShow={this.addBandToShow}/>
 			</div>
 
 		)

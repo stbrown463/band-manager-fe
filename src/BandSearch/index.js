@@ -8,7 +8,7 @@ class	BandSearch extends Component {
 		this.state = {
 			name: '',
 			city: '',
-			bands: []
+			bands: [],
 		}
 	}
 
@@ -67,7 +67,8 @@ class	BandSearch extends Component {
 	render () {
 		return (
 			<div>
-				<h3>Don't see your band? Try searching it's name</h3>
+				{this.props.addBandtoShow ? <h3>Don't see your band? Try searching it's name</h3> :
+				<h3>Add a band to the show</h3> }
 				<form onSubmit={this.searchBand}>
 					<input type="text" name="name" placeholder="Band name..." value={this.state.name} onChange={this.handleChange}/>
 					<input type="text" name="city" placeholder="Band city..." value={this.state.city} onChange={this.handleChange}/>
@@ -75,7 +76,9 @@ class	BandSearch extends Component {
 				</form>
 				{this.state.bands !== null ? <BandSearchResults 
 					bands={this.state.bands}
-					addBandMember={this.addBandMember} /> : null}
+					addBandMember={this.addBandMember}
+					onShowPage={this.props.onShowPage}
+					addBandToShow={this.props.addBandToShow} /> : null}
 			</div>
 		)
 	}

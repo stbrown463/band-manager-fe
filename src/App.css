@@ -16,6 +16,10 @@ footer{
   right:0;
 }
 
+main {
+  margin-bottom: 100px;
+}
+
 #nav-bar{
   display: flex;
   justify-content: space-around;
@@ -55,4 +59,10 @@ footer{
   justify-content: center;
 }
 
+.row-around {
+  width: 100vw;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
