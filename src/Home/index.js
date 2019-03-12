@@ -7,32 +7,6 @@ class Home extends Component {
 		this.props.getShowsOfBand()
 	}
 
-	// getShowsOfBand = async () => {
-	// 	console.log('get shows was called');
-	// 	console.log(this.props.band_id, "band_id in get shows of band");
-	// 	try {
-	// 		const response = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/${this.props.band_id}`)
-
-	// 		if (!response.ok) {
- //        throw Error(response.statusText)
- //      }
-
- //      const parsedResponse = await response.json()
- //      console.log(parsedResponse);
-
- //      this.setState({
- //      	shows: [...parsedResponse]
- //      })
-
-	// 	} catch (err) {
-	// 		console.log(err)
-	// 	}
-
-	// }
-
-
-
-
 	render () {
 		console.log(this.props, "props on home page");
 		return (

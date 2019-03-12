@@ -27,8 +27,11 @@ const BandsOfShow = ({bands}) => {
 // show_id: "2"
 
 	return (
-		<div className="card-container">
-			{showList}
+		<div className="center">
+			<h3>Bands</h3>
+			<div className="card-container">
+				{showList}
+			</div>
 		</div>
 	)
 }

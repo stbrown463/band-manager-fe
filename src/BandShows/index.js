@@ -19,11 +19,6 @@ const BandShows = ({shows, band_name, setShow}) => {
     )
   })
 
-
-
-
-
-
 return (
 		<div className="card-container">
 			{showList}

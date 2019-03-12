@@ -247,7 +247,7 @@ class App extends Component {
       venue_name: show.venue_name,
       zipcode: show.zipcode
     })
-    this.props.history.push('/show')
+    this.props.history.push('/show/view')
   }
 
 
@@ -257,7 +257,6 @@ class App extends Component {
     return (
       <React.Fragment>
         <main>
-          <h1>Welcome to my Friggen App</h1>
           <Switch>
             <Route exact path='/' render={() => <AuthContainer 
                handleRegister={this.handleRegister} 
@@ -287,7 +286,7 @@ class App extends Component {
               getShowsOfBand={this.getShowsOfBand}
               shows={this.state.shows}
               setShow={this.setShow}/>} />
-            <Route exact path='/show' render={() => <ShowView 
+            <Route exact path='/show/view' render={() => <ShowView 
               username={this.state.username}
               user_id={this.state.user_id}
               band_id={this.state.band_id}
