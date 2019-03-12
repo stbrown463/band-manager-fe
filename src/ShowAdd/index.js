@@ -24,7 +24,7 @@ class ShowAdd extends Component {
     // console.log('handlechange is called');
     this.setState({
       [e.target.name]: e.target.value,
-      userIsMember: e.target.checked
+      userBandPlaying: e.target.checked
     })
   }
 
@@ -121,7 +121,7 @@ class ShowAdd extends Component {
 					<input name="poster_url" type="url" value={this.state.poster_url} placeholder="poster_url" onChange={this.handleChange}/><br/>
 					{this.props.band_name ? <label>
 						Is {this.props.band_name} playing this show?
-						<input name="userIsMember" type="checkbox" value={this.state.userIsMember} placeholder="userIsMember" onChange={this.handleChange}/><br/> 
+						<input name="userBandPlaying" type="checkbox" value={this.state.userBandPlaying} placeholder="userBandPlaying" onChange={this.handleChange}/><br/> 
 					</label> : null}
 					<button type="submit">Add Show</button>
 				</form>

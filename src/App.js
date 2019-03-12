@@ -5,6 +5,7 @@ import BandSelect from './BandSelect'
 import BandAdd from './BandAdd'
 import ShowAdd from './ShowAdd'
 import VenueAdd from './VenueAdd'
+import ContactAdd from './ContactAdd'
 import Navigation from './Navigation'
 import ShowView from './ShowView'
 import NewContainer from './NewContainer'
@@ -325,6 +326,11 @@ class App extends Component {
               band_id={this.state.band_id}
               band_name={this.state.band_name}/>}/>
             <Route exact path='/venue/add' render={() => <VenueAdd
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}/>}/>
+            <Route exact path='/contact/add' render={() => <ContactAdd
               username={this.state.username}
               user_id={this.state.user_id}
               band_id={this.state.band_id}
