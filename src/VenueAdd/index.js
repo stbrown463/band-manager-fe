@@ -27,14 +27,65 @@ class VenueAdd extends Component {
     })
   }
 
+  addVenue = async (e) => {
+  	e.preventDefault()
+  	console.log(this.state, "add venue was called, this is state");
+
+  	// Create Band
+  	try {
+  		const response = await fetch(`${process.env.REACT_APP_API_URL}/venues/new`, {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+  		})
+			if (!response.ok) {
+        throw Error(response.statusText)
+      }
+      const parsedResponse = await response.json()
+      // console.log(parsedResponse);
+
+      // Add user as member of band
+      if (this.state.userWorksHere) {
+				try {
+					console.log('hitting add user as member of band');
+					const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/venues/contact/new`,{
+					  method: 'POST',
+					  body: JSON.stringify({
+					  	user_id: this.props.user_id,
+					  	venue_id: parsedResponse.id,
+					  }),
+					  credentials: 'include',
+					  headers: {
+					    'Content-Type': 'application/json'
+					  }
+					})
+					if (!memberResponse.ok) {
+					  throw Error(memberResponse.statusText)
+					}
+					const parsedMember = await memberResponse.json()
+					console.log(parsedMember);
+
+				} catch (err) {
+					console.log(err)
+				}
+			}
+			// this.props.getBandsOfUser()
+  	} catch (err) {
+  		console.log(err)
+  	}
+  }
+
   render () {
   	return (
   		<div>
   			<h1>Add a Venue</h1>
-  			<form>
+  			<form onSubmit={this.addVenue}>
   				<input name="name" type="text" value={this.state.name} placeholder="name" onChange={this.handleChange}/><br/>
   				<input name="email" type="email" value={this.state.email} placeholder="email" onChange={this.handleChange}/><br/>
-  				<input name="img_url" type="url" value={this.state.img_url} placeholder="img_url" onChange={this.handleChange}/><br/>
+  				<input name="img_url" type="text" value={this.state.img_url} placeholder="img_url" onChange={this.handleChange}/><br/>
   				<input name="streetAddress" type="text" value={this.state.streetAddress} placeholder="streetAddress" onChange={this.handleChange}/><br/>
   				<input name="city" type="text" value={this.state.city} placeholder="city" onChange={this.handleChange}/><br/>
   				<input name="state" type="text" value={this.state.state} placeholder="state" onChange={this.handleChange}/><br/>
