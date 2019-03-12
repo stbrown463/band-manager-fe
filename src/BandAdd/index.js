@@ -76,29 +76,29 @@ class BandAdd extends Component {
   	}
   }
 
-  addBandMember = async (e) => {
-  	// try {
-  	// 	console.log('hitting add user as member of band');
-  	// 	const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/bands/member/new`,{
-   //      method: 'POST',
-   //      body: JSON.stringify({
-   //      	user_id: this.props.user_id,
-   //      	band_id: parsedResponse.id,
-   //      }),
-   //      credentials: 'include',
-   //      headers: {
-   //        'Content-Type': 'application/json'
-   //      }
-  	// 	})
-   //    if (!memberResponse.ok) {
-   //      throw Error(memberResponse.statusText)
-   //    }
-   //    const parsedMember = await response.json()
-   //    console.log(parsedMember);
-  	// } catch (err) {
-  	// 	console.log(err)
-  	// }
-  }
+  // addBandMember = async (e) => {
+  // 	// try {
+  // 	// 	console.log('hitting add user as member of band');
+  // 	// 	const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/bands/member/new`,{
+  //  //      method: 'POST',
+  //  //      body: JSON.stringify({
+  //  //      	user_id: this.props.user_id,
+  //  //      	band_id: parsedResponse.id,
+  //  //      }),
+  //  //      credentials: 'include',
+  //  //      headers: {
+  //  //        'Content-Type': 'application/json'
+  //  //      }
+  // 	// 	})
+  //  //    if (!memberResponse.ok) {
+  //  //      throw Error(memberResponse.statusText)
+  //  //    }
+  //  //    const parsedMember = await response.json()
+  //  //    console.log(parsedMember);
+  // 	// } catch (err) {
+  // 	// 	console.log(err)
+  // 	// }
+  // }
 
 	render () {
 		// console.log(this.props);
@@ -119,11 +119,8 @@ class BandAdd extends Component {
 					<button type="submit">Add Band</button>
 				</form>
 			</div>
-
-
 		)
 	}
-
 }
 
 export default BandAdd

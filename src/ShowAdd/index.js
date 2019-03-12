@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import VenueSearch from '../VenueSearch'
 
 class ShowAdd extends Component {
 	constructor() {
@@ -28,23 +29,38 @@ class ShowAdd extends Component {
     })
   }
 
-  searchVenues = (e) => {
-  	console.log('searcHVenues was called');
-  }
-
   getVenues = (e) => {
   	console.log('getVenues was called');
   }
 
   setVenue = (e) => {
-  	console.log('setVenues was called');
+    e.preventDefault()
+    console.log('setVenue was valled');
+    if (e.target.value != null) {
+      const venueData = e.target.value.split(",");
+      this.setState({
+        venue: Number(venueData[0]),
+      })
+    } else {
+      this.setState({
+        venue: null,
+      })
+    }
   }
 
   addShow = async (e) => {
   	e.preventDefault()
   	console.log(this.state, "add band was called, this is state");
 
-  	// Create Band
+  // 	date: "2019-09-04T20:30"
+		// doors: "20:00"
+		// loadIn: "18:00"
+		// notes: "A good show"
+		// poster_url: "https://scontent-ort2-2.xx.fbcdn.net/v/t1.0-9/40586973_1917118495249458_3563177492363608064_o.jpg?_nc_cat=102&_nc_ht=scontent-ort2-2.xx&oh=3c2781017fb5c68e2f98f0cb99e20433&oe=5D23E9A2"
+		// userBandPlaying: false
+		// venue: ""
+
+  	//Create Band
   	try {
   		const response = await fetch(`${process.env.REACT_APP_API_URL}/shows/new`, {
         method: 'POST',
@@ -58,36 +74,35 @@ class ShowAdd extends Component {
         throw Error(response.statusText)
       }
       const parsedResponse = await response.json()
-      // console.log(parsedResponse);
+       console.log(parsedResponse);
 
       // Add user as member of band
-      if (this.state.userIsMember) {
+      if (this.state.userBandPlaying) {
 				try {
 					console.log('hitting add user as member of band');
-					// console.log(this.props.user_id);
-					// console.log(parsedResponse.id);
-					const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/bands/member/new`,{
+					console.log(this.props.user_id);
+					console.log(parsedResponse.id);
+					const bandResponse = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/new`,{
 					  method: 'POST',
 					  body: JSON.stringify({
-					  	user_id: this.props.user_id,
-					  	band_id: parsedResponse.id,
+					  	band_id: this.props.band_id,
+					  	show_id: parsedResponse.id,
 					  }),
 					  credentials: 'include',
 					  headers: {
 					    'Content-Type': 'application/json'
 					  }
 					})
-					if (!memberResponse.ok) {
-					  throw Error(memberResponse.statusText)
+					if (!bandResponse.ok) {
+					  throw Error(bandResponse.statusText)
 					}
-					const parsedMember = await memberResponse.json()
-					console.log(parsedMember);
+					const parsedBand = await bandResponse.json()
+					console.log(parsedBand);
 
 				} catch (err) {
 					console.log(err)
 				}
 			}
-			this.props.getBandsOfUser()
   	} catch (err) {
   		console.log(err)
   	}
@@ -98,27 +113,23 @@ class ShowAdd extends Component {
 		return (
 			<div>
 				<h1>Add a new show</h1>
+
+				<VenueSearch setVenue={this.setVenue} /><br/>
 				<form onSubmit={this.addShow}>
-					<label>
-						Select venue. Don't see a venue? Link to addVenue page here<br />
-						<select onChange={this.setVenue.bind(null)}>
-							<option value={[null]}>No Venue</option>
-						</select><br/>
-					</label>
 					<label>
 						Date of show and start time<br />
 						<input name="date" type="datetime-local" value={this.state.date} placeholder="date" onChange={this.handleChange}/><br/>
 					</label>
 					<label>
 						Load in Time<br/>
-						<input name="loadIn" type="time" value={this.state.loadIn} placeholder="loadIn" onChange={this.handleChange}/><br/>
+						<input name="loadIn" type="datetime-local" value={this.state.loadIn} placeholder="loadIn" onChange={this.handleChange}/><br/>
 					</label>
 					<label>
 						Doors time<br />
-						<input name="doors" type="time" value={this.state.doors} placeholder="doors" onChange={this.handleChange}/><br/>
+						<input name="doors" type="datetime-local" value={this.state.doors} placeholder="doors" onChange={this.handleChange}/><br/>
 					</label>
 					<input name="notes" type="text" value={this.state.notes} placeholder="notes" onChange={this.handleChange}/><br/>
-					<input name="poster_url" type="url" value={this.state.poster_url} placeholder="poster_url" onChange={this.handleChange}/><br/>
+					<input name="poster_url" type="text" value={this.state.poster_url} placeholder="poster_url" onChange={this.handleChange}/><br/>
 					{this.props.band_name ? <label>
 						Is {this.props.band_name} playing this show?
 						<input name="userBandPlaying" type="checkbox" value={this.state.userBandPlaying} placeholder="userBandPlaying" onChange={this.handleChange}/><br/> 
