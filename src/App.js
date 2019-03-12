@@ -32,15 +32,15 @@ class App extends Component {
 
 
       bandshow_id: '',
-      city: '',
+      show_city: '',
       date: '',
       doors: '',
-      email: '',
-      id: '',
+      show_email: '',
+      show_id: '',
       loadIn: '',
       notes: '',
       poster_url: '',
-      state: '',
+      show_state: '',
       streetAddress: '',
       venue_id: '',
       venue_name: '',
@@ -230,6 +230,24 @@ class App extends Component {
   setShow = (showindex, e) => {
     console.log('setShow was called');
     console.log(showindex, "show index");
+    const show = this.state.shows[showindex]
+    this.setState({
+      bandshow_id: show.bandshow_id,
+      show_city: show.city,
+      date: show.date,
+      doors: show.doors,
+      show_email: show.email,
+      show_id: show.id,
+      loadIn: show.loadIn,
+      notes: show.notes,
+      poster_url: show.poster_url,
+      show_state: show.state,
+      streetAddress: show.streetAddress,
+      venue_id: show.venue_id,
+      venue_name: show.venue_name,
+      zipcode: show.zipcode
+    })
+    this.props.history.push('/show')
   }
 
 
@@ -273,7 +291,21 @@ class App extends Component {
               username={this.state.username}
               user_id={this.state.user_id}
               band_id={this.state.band_id}
-              band_name={this.state.band_name}/>} />
+              band_name={this.state.band_name}
+              bandshow_id= {this.state.bandshow_id}
+              city={this.state.city}
+              date={this.state.date}
+              doors={this.state.doors}
+              email={this.state.email}
+              show_id={this.state.show_id}
+              loadIn={this.state.loadIn}
+              notes={this.state.notes}
+              poster_url={this.state.poster_url}
+              state={this.state.state}
+              streetAddress={this.state.streetAddress}
+              venue_id={this.state.venue_id}
+              venue_name={this.state.venue_name}
+              zipcode={this.state.zipcode}/>} />
           </Switch>
         </main>
         <footer>
