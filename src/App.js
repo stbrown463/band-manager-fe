@@ -270,30 +270,34 @@ class App extends Component {
       const parsedResponse = await response.json()
       console.log(parsedResponse);
 
-      // parsed response looks like this
-      // city: "Chicago"
-      // email: "gb@gb.com"
-      // id: 2
-      // img_url: "gb.jpg"
-      // name: "Good Brother"
-      // state: "IL"
-      // website: "gb.com"
-      this.setState({
-        bandToView: {
-          city: parsedResponse.city,
-          email: parsedResponse.email,
-          id: parsedResponse.id,
-          img_url: parsedResponse.img_url,
-          name: parsedResponse.name,
-          state: parsedResponse.state,
-          website: parsedResponse.website,
-        }
-      })
+      try {
+        const responseShows = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/${band_id}`)
 
+        if (!responseShows.ok) {
+          throw Error(responseShows.statusText)
+        }
+
+        const showResponse = await responseShows.json()
+        console.log(showResponse);
+
+        this.setState({
+          bandToView: {
+            city: parsedResponse.city,
+            email: parsedResponse.email,
+            id: parsedResponse.id,
+            img_url: parsedResponse.img_url,
+            name: parsedResponse.name,
+            state: parsedResponse.state,
+            website: parsedResponse.website,
+            shows: [...showResponse]
+          }
+        })
+      } catch (err) {
+        console.log(err)
+      }
     } catch (err) {
       console.log(err)
     }
-
   }
 
 
