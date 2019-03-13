@@ -40,7 +40,7 @@ class ShowView extends Component {
   addBandToShow = async (band_id, e) => {
   	console.log('add band to show was called');
   	// connect bands first
-  	this.connectBands(band_id)
+  	// this.connectBands(band_id)
   	try {
   		
 			const response = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/new`,{
@@ -99,7 +99,84 @@ class ShowView extends Component {
 
 			// loop through the array of bands on the show
 			// band (band_id) being added connects or reconnects to all other bands (this.state.bands[i].id) of show
-			// for (let i = 0; i < this.state.bands.length; i++) {
+			for (let i = 0; i < this.state.bands.length; i++) {
+				if (band_id !== this.state.bands[i].band_id) {
+					const addedBandConnection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/new`, {
+					  method: 'POST',
+					  body: JSON.stringify({
+					  	my_band_id: band_id,
+					  	other_band_id: this.state.bands[i].band_id,
+					  	notes: '',
+					  }),
+					  credentials: 'include',
+					  headers: {
+					    'Content-Type': 'application/json'
+					  }
+					})
+
+					const parsedAddedBandConnection = await addedBandConnection.json()
+
+					if (addedBandConnection.status === 200 && response.status === 201) {
+						// reconnect with venue by c_id
+						const addedBandReconnect = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/${parsedConnection.id}/reconnect`, {
+						  method: 'PUT',
+						  credentials: 'include',
+						  headers: {
+						    'Content-Type': 'application/json'
+						  }
+						})
+						if (!addedBandReconnect.ok) {
+							throw Error(connection.statusText)
+						}
+						const parsedAddedBandReconnect = await addedBandReconnect.json()
+						console.log(parsedAddedBandReconnect, "parsedAddedBandReconnect");
+					} else {
+						console.log(parsedAddedBandConnection, "parsedAddedBandConnection");
+					}
+
+				// all other bands (this.state.bands[i].id) of show connect or reconnect to band (band_id) being added 
+					const myBandConnection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/new`, {
+					  method: 'POST',
+					  body: JSON.stringify({
+					  	my_band_id: this.state.bands[i].band_id,
+					  	other_band_id: band_id,
+					  	notes: '',
+					  }),
+					  credentials: 'include',
+					  headers: {
+					    'Content-Type': 'application/json'
+					  }
+					})
+
+					const parsedMyBandConnection = await myBandConnection.json()
+
+					if (myBandConnection.status === 200 && response.status === 201) {
+						// reconnect with venue by c_id
+						const myBandReconnect = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/${parsedConnection.id}/reconnect`, {
+						  method: 'PUT',
+						  credentials: 'include',
+						  headers: {
+						    'Content-Type': 'application/json'
+						  }
+						})
+						if (!myBandReconnect.ok) {
+							throw Error(connection.statusText)
+						}
+						const parsedMyBandReconnect = await myBandReconnect.json()
+						console.log(parsedMyBandReconnect, "parsedMyBandReconnect");
+					} else {
+						console.log(parsedMyBandConnection, "parsedMyBandConnection");
+					}
+				}
+			}
+  	} catch (err) {
+  		console.log(err)
+  	}
+  }
+
+  connectBands = async (band_id) => {
+  	// try {
+  	// 	for (let i = 0; i < this.state.bands.length; i++) {
 			// 	const addedBandConnection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/new`, {
 			// 	  method: 'POST',
 			// 	  body: JSON.stringify({
@@ -167,84 +244,9 @@ class ShowView extends Component {
 			// 		console.log(parsedMyBandConnection, "parsedMyBandConnection");
 			// 	}
 			// }
-  	} catch (err) {
-  		console.log(err)
-  	}
-  }
-
-  connectBands = (band_id) => {
-  	try {
-  		for (let i = 0; i < this.state.bands.length; i++) {
-				const addedBandConnection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/new`, {
-				  method: 'POST',
-				  body: JSON.stringify({
-				  	my_band_id: band_id,
-				  	other_band_id: this.state.bands[i].band_id,
-				  	notes: '',
-				  }),
-				  credentials: 'include',
-				  headers: {
-				    'Content-Type': 'application/json'
-				  }
-				})
-
-				const parsedAddedBandConnection = await addedBandConnection.json()
-
-				if (addedBandConnection.status === 200 && response.status === 201) {
-					// reconnect with venue by c_id
-					const addedBandReconnect = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/${parsedConnection.id}/reconnect`, {
-					  method: 'PUT',
-					  credentials: 'include',
-					  headers: {
-					    'Content-Type': 'application/json'
-					  }
-					})
-					if (!addedBandReconnect.ok) {
-						throw Error(connection.statusText)
-					}
-					const parsedAddedBandReconnect = await addedBandReconnect.json()
-					console.log(parsedAddedBandReconnect, "parsedAddedBandReconnect");
-				} else {
-					console.log(parsedAddedBandConnection, "parsedAddedBandConnection");
-				}
-
-			// all other bands (this.state.bands[i].id) of show connect or reconnect to band (band_id) being added 
-				const myBandConnection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/new`, {
-				  method: 'POST',
-				  body: JSON.stringify({
-				  	my_band_id: this.state.bands[i].band_id,
-				  	other_band_id: band_id,
-				  	notes: '',
-				  }),
-				  credentials: 'include',
-				  headers: {
-				    'Content-Type': 'application/json'
-				  }
-				})
-
-				const parsedMyBandConnection = await myBandConnection.json()
-
-				if (myBandConnection.status === 200 && response.status === 201) {
-					// reconnect with venue by c_id
-					const myBandReconnect = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/${parsedConnection.id}/reconnect`, {
-					  method: 'PUT',
-					  credentials: 'include',
-					  headers: {
-					    'Content-Type': 'application/json'
-					  }
-					})
-					if (!myBandReconnect.ok) {
-						throw Error(connection.statusText)
-					}
-					const parsedMyBandReconnect = await myBandReconnect.json()
-					console.log(parsedMyBandReconnect, "parsedMyBandReconnect");
-				} else {
-					console.log(parsedMyBandConnection, "parsedMyBandConnection");
-				}
-			}
-  	} catch (err) {
-  		console.log(err)
-  	}
+  	// } catch (err) {
+  	// 	console.log(err)
+  	// }
   }
 
 	render () {

@@ -12,7 +12,7 @@ const ConnectionList = ({venues, bands, contacts, makeConnection}) => {
 			<div className="card" key={band.id}>
 				<h3>{band.name}</h3>
 				<h4>{band.city}, {band.state}</h4>
-				<a href={"mailto:" + band.email} onClick={makeConnection.bind(null, band.id, "bv")}>Email</a>		
+				<a href={"mailto:" + band.email} onClick={makeConnection.bind(null, band.id, "bb")}>Email</a>		
 			</div>
     )
   })
