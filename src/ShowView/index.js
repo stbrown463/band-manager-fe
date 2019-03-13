@@ -3,11 +3,6 @@ import BandsOfShow from '../BandsOfShow'
 import BandSearch from '../BandSearch'
 
 
-
-
-
-
-
 class ShowView extends Component {
 	constructor () {
 		super()
@@ -79,9 +74,9 @@ class ShowView extends Component {
 
 			const parsedConnection = await connection.json()
 
-			if (connection.status === 200) {
+			if (connection.status === 200 && response.status === 201) {
 				// reconnect with venue by c_id
-				const reconnect = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/${parsedConnection.c_id}/reconnect`, {
+				const reconnect = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/${parsedConnection.id}/reconnect`, {
 				  method: 'PUT',
 				  credentials: 'include',
 				  headers: {
