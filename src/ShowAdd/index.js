@@ -105,7 +105,7 @@ class ShowAdd extends Component {
 				  }
 		  	})
 				const parsedConnection = await connection.json()
-				console.log(parsedConnection);
+				console.log(connection.status);
 
 				if (connection.status === 200) {
 					// reconnect with venue by c_id
