@@ -25,6 +25,8 @@ class Home extends Component {
 					user_id={this.props.user_id}
 					band_name={this.props.band_name}
 					band_id={this.props.band_id}>Add a Show</Link>
+				<Link to={'/connections'} id="new"> Connections </Link>
+
 			</div>
 		)
 	}

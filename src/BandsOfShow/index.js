@@ -12,7 +12,7 @@ const BandsOfShow = ({bands, setBandToView}) => {
 					{band.band_city}, {band.band_state}<br /><br />
 					{band.email}<br/>
 					{band.band_website}<br />
-					<Link to={'/band/view'} id='bandView' onClick={setBandToView.bind(null, band.id)}>More Details</Link>
+					<Link to={'/band/view'} id='bandView' onClick={setBandToView.bind(null, band.band_id)}>More Details</Link>
 				</p>
 			</div>
     )

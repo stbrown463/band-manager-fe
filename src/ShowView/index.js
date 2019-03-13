@@ -62,6 +62,30 @@ class ShowView extends Component {
 			const parsedResponse = await response.json()
 			console.log(parsedResponse);
 			this.getBandsOfShow()
+				try {
+					console.log('Connect band to venue');
+					const connection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/new`, {
+					  method: 'POST',
+					  body: JSON.stringify({
+					  	my_band_id: band_id,
+					  	venue_id: this.props.venue_id,
+					  	notes: '',
+					  }),
+					  credentials: 'include',
+					  headers: {
+					    'Content-Type': 'application/json'
+					  }
+					})
+				if (!connection.ok) {
+				  throw Error(connection.statusText)
+				}
+
+				const parsedConnection = await connection.json()
+				console.log(parsedConnection);
+
+				} catch (err) {
+					console.log(err)
+				}
 
 		} catch (err) {
 			console.log(err)

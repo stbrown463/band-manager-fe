@@ -90,6 +90,31 @@ class ShowAdd extends Component {
 					const parsedBand = await bandResponse.json()
 					console.log(parsedBand);
 
+					try {
+						console.log('Connect band to venue');
+				  	const connection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/new`, {
+						  method: 'POST',
+						  body: JSON.stringify({
+						  	my_band_id: this.props.band_id,
+						  	venue_id: this.state.venue,
+						  	notes: '',
+						  }),
+						  credentials: 'include',
+						  headers: {
+						    'Content-Type': 'application/json'
+						  }
+				  	})
+				  if (!connection.ok) {
+					  throw Error(connection.statusText)
+					}
+
+					const parsedConnection = await connection.json()
+					console.log(parsedConnection);
+
+					} catch (err) {
+						console.log(err)
+					}
+
 				} catch (err) {
 					console.log(err)
 				}

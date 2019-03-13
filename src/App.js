@@ -9,6 +9,7 @@ import ContactAdd from './ContactAdd'
 import Navigation from './Navigation'
 import ShowView from './ShowView'
 import NewContainer from './NewContainer'
+import Connections from './Connections'
 import BandView from './BandView'
 import Home from './Home'
 import './App.css';
@@ -32,10 +33,7 @@ class App extends Component {
       band_id: '',
       band_name: '',
 
-
       shows: [],
-
-
 
       bandshow_id: '',
       show_city: '',
@@ -52,8 +50,11 @@ class App extends Component {
       venue_name: '',
       zipcode: '',
 
+      bandToView: {},
 
-      bandToView: {}
+      venueConnects: [],
+      bandConnects: [],
+      contactConnects: []
     }
   }
 
@@ -91,7 +92,8 @@ class App extends Component {
           verify_password: ''
         });
         console.log(this.state);
-        // this.props.history.push('/home')
+        this.getBandsOfUser()
+        this.props.history.push('/bandselect')
       }
 
 
@@ -300,6 +302,47 @@ class App extends Component {
     }
   }
 
+  getConnections = async () => {
+    console.log('getConnections was called');
+    try {
+      const venues = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/${this.state.band_id}`)
+
+      if (!venues.ok) {
+        throw Error(venues.statusText)
+      }
+
+      const parsedVenues = await venues.json()
+      console.log(parsedVenues);
+
+      const bands = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/${this.state.band_id}`)
+
+      if (!bands.ok) {
+        throw Error(bands.statusText)
+      }
+
+      const parsedBands = await bands.json()
+      console.log(parsedBands);
+
+      const contacts = await fetch (`${process.env.REACT_APP_API_URL}/connections/bc/${this.state.band_id}`)
+
+      if (!contacts.ok) {
+        throw Error(contacts.statusText)
+      }
+
+      const parsedContacts = await contacts.json()
+      console.log(parsedContacts);
+
+      this.setState({
+        venueConnects: [...parsedVenues],
+        bandConnects: [...parsedBands],
+        contactConnects: [...parsedContacts]
+      })
+      
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 
 
   render() {
@@ -392,6 +435,16 @@ class App extends Component {
               user_id={this.state.user_id}
               band_id={this.state.band_id}
               band_name={this.state.band_name}/>}/>
+            <Route exact path='/connections' render={() => <Connections
+              username={this.state.username}
+              user_id={this.state.user_id}
+              band_id={this.state.band_id}
+              band_name={this.state.band_name}
+              venueConnects={this.state.venueConnects}
+              bandConnects={this.state.bandConnects}
+              contactConnects={this.state.contactConnects}
+              getConnections={this.getConnections}/>}/>
+
           </Switch>
         </main>
         <footer>
