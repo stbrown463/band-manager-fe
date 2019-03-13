@@ -3,7 +3,7 @@ import React from 'react'
 const BandShows = ({shows, band_name, setShow}) => {
 
 	
-	console.log(shows);
+
 	const showList = shows.map((show, i) => {
 
 

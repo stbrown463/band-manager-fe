@@ -16,22 +16,22 @@ class ShowAdd extends Component {
 		}
 	}
 
-	componentDidMount() {
-		this.getVenues()
-	}
+	// componentDidMount() {
+	// 	this.getVenues()
+	// }
 
 
   handleChange = (e) => {
-    // console.log('handlechange is called');
+
     this.setState({
       [e.target.name]: e.target.value,
       userBandPlaying: e.target.checked
     })
   }
 
-  getVenues = (e) => {
-  	console.log('getVenues was called');
-  }
+  // getVenues = (e) => {
+  // 	console.log('getVenues was called');
+  // }
 
   setVenue = (e) => {
     e.preventDefault()

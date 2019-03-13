@@ -7,11 +7,6 @@ class Connections extends Component {
 	}
 
 	makeConnection = async (id, type, e) => {
-		// e.preventDefault()
-		// console.log('connect with band was called');
-		// console.log('this is id=', id);
-		// console.log('this is type=', type);
-
 		let connectionBody = {}
 		if (type === 'bv') {
 			connectionBody = {
@@ -45,7 +40,6 @@ class Connections extends Component {
 			  }
 	  	})
 			const parsedConnection = await connection.json()
-			console.log(connection.status);
 
 			if (connection.status === 200) {
 				// reconnect with venue by c_id
@@ -70,7 +64,7 @@ class Connections extends Component {
 	}
 
 	render () {
-		console.log(this.props);
+		// console.log(this.props);
 		return(
 			<div>
 				<ConnectionList 

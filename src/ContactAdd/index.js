@@ -14,7 +14,6 @@ class ContactAdd extends Component {
 	}
 
   handleChange = (e) => {
-    // console.log('handlechange is called');
     this.setState({
       [e.target.name]: e.target.value,
       userKnowsContact: e.target.checked

@@ -31,7 +31,7 @@ class AuthContainer extends Component {
 		// console.log(this.props);
 		return (
 			<div>
-				<h2>This is auth container</h2>
+				<h1>BandConnectr</h1>
 				{!this.state.showRegister ? <Login 
 					handleLogin={this.props.handleLogin} 
 					handleChange={this.props.handleChange} 

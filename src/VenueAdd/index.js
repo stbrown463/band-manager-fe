@@ -20,7 +20,7 @@ class VenueAdd extends Component {
 	}
 
   handleChange = (e) => {
-    // console.log('handlechange is called');
+
     this.setState({
       [e.target.name]: e.target.value,
       userWorksHere: e.target.checked
@@ -29,7 +29,6 @@ class VenueAdd extends Component {
 
   addVenue = async (e) => {
   	e.preventDefault()
-  	console.log(this.state, "add venue was called, this is state");
 
   	// Create Band
   	try {
@@ -45,7 +44,6 @@ class VenueAdd extends Component {
         throw Error(response.statusText)
       }
       const parsedResponse = await response.json()
-      // console.log(parsedResponse);
 
       // Add user as member of band
       if (this.state.userWorksHere) {

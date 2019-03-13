@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BandShows from '../BandShows'
+import Connections from '../Connections'
 import { withRouter, Link } from 'react-router-dom'
 
 class Home extends Component {
@@ -9,10 +10,10 @@ class Home extends Component {
 	}
 
 	render () {
-		console.log(this.props, "props on home page");
 		return (
 			<div className="center">
-				<h3>{this.props.band_name}'s Upcoming Shows</h3>
+				<h1>{this.props.band_name}</h1>
+				<h3>Upcoming Shows</h3>
 				<BandShows 
 					username={this.props.username}
 					user_id={this.props.user_id}
@@ -25,8 +26,11 @@ class Home extends Component {
 					user_id={this.props.user_id}
 					band_name={this.props.band_name}
 					band_id={this.props.band_id}>Add a Show</Link>
-				<Link to={'/connections'} id="new"> Connections </Link>
-
+				<Connections 
+			    venueConnects={this.props.venueConnects}
+	        bandConnects={this.props.bandConnects}
+	        contactConnects={this.props.contactConnects}
+	        getConnections={this.props.getConnections}/>
 			</div>
 		)
 	}

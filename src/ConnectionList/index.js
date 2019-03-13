@@ -2,9 +2,9 @@ import React from 'react'
 
 const ConnectionList = ({venues, bands, contacts, makeConnection}) => {
 
-	console.log(bands, "bands");
-	console.log(contacts, "contacts");
-	console.log(venues, "venues");
+	// console.log(bands, "bands");
+	// console.log(contacts, "contacts");
+	// console.log(venues, "venues");
 
 	const bandList = bands.map((band, i) => {
 
@@ -41,12 +41,11 @@ const ConnectionList = ({venues, bands, contacts, makeConnection}) => {
 
 return (
 		<div className = "center">
-			<h1>Connections</h1>
-			<h3>Bands</h3>
+			<h3>Band Connections</h3>
 			<div className="card-container">
 				{bandList}
 			</div>
-			<h3>Venues</h3>
+			<h3>Venues Connections</h3>
 			<div className="card-container">
 				{venueList}
 			</div>

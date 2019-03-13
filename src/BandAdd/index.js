@@ -16,7 +16,6 @@ class BandAdd extends Component {
 	}
 
   handleChange = (e) => {
-    // console.log('handlechange is called');
     this.setState({
       [e.target.name]: e.target.value,
       userIsMember: e.target.checked
@@ -25,7 +24,6 @@ class BandAdd extends Component {
 
   addBand = async (e) => {
   	e.preventDefault()
-  	console.log(this.state, "add band was called, this is state");
 
   	// Create Band
   	try {
@@ -41,34 +39,26 @@ class BandAdd extends Component {
         throw Error(response.statusText)
       }
       const parsedResponse = await response.json()
-      // console.log(parsedResponse);
 
       // Add user as member of band
       if (this.state.userIsMember) {
-				try {
-					console.log('hitting add user as member of band');
-					// console.log(this.props.user_id);
-					// console.log(parsedResponse.id);
-					const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/bands/member/new`,{
-					  method: 'POST',
-					  body: JSON.stringify({
-					  	user_id: this.props.user_id,
-					  	band_id: parsedResponse.id,
-					  }),
-					  credentials: 'include',
-					  headers: {
-					    'Content-Type': 'application/json'
-					  }
-					})
-					if (!memberResponse.ok) {
-					  throw Error(memberResponse.statusText)
-					}
-					const parsedMember = await memberResponse.json()
-					console.log(parsedMember);
-
-				} catch (err) {
-					console.log(err)
+				// console.log('hitting add user as member of band');
+				const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/bands/member/new`,{
+				  method: 'POST',
+				  body: JSON.stringify({
+				  	user_id: this.props.user_id,
+				  	band_id: parsedResponse.id,
+				  }),
+				  credentials: 'include',
+				  headers: {
+				    'Content-Type': 'application/json'
+				  }
+				})
+				if (!memberResponse.ok) {
+				  throw Error(memberResponse.statusText)
 				}
+				// const parsedMember = await memberResponse.json()
+				// console.log(parsedMember);
 			}
 			this.props.getBandsOfUser()
   	} catch (err) {
@@ -76,29 +66,6 @@ class BandAdd extends Component {
   	}
   }
 
-  // addBandMember = async (e) => {
-  // 	// try {
-  // 	// 	console.log('hitting add user as member of band');
-  // 	// 	const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/bands/member/new`,{
-  //  //      method: 'POST',
-  //  //      body: JSON.stringify({
-  //  //      	user_id: this.props.user_id,
-  //  //      	band_id: parsedResponse.id,
-  //  //      }),
-  //  //      credentials: 'include',
-  //  //      headers: {
-  //  //        'Content-Type': 'application/json'
-  //  //      }
-  // 	// 	})
-  //  //    if (!memberResponse.ok) {
-  //  //      throw Error(memberResponse.statusText)
-  //  //    }
-  //  //    const parsedMember = await response.json()
-  //  //    console.log(parsedMember);
-  // 	// } catch (err) {
-  // 	// 	console.log(err)
-  // 	// }
-  // }
 
 	render () {
 		// console.log(this.props);

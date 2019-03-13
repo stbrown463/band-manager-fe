@@ -3,8 +3,7 @@ import { withRouter, Link } from 'react-router-dom'
 
 class NewContainer extends Component {
 	render () {
-		console.log(this.props);
-		return (
+			return (
 			<div>
 				<h1>Add your Band, show, venue, or contact</h1>
 				<div className="row">
@@ -22,10 +21,6 @@ class NewContainer extends Component {
 						<h2>Venue</h2>
 						<Link to={'/venue/add'} id='new-venue'>Add</Link>
 					</div>
-					<div className="card">
-						<h2>Contact</h2>
-						<Link to={'/contact/add'} id='new-contact'>Add</Link>
-					</div>
 				</div>
 			</div>
 		)
@@ -33,3 +28,7 @@ class NewContainer extends Component {
 }
 
 export default withRouter(NewContainer)
+					// <div className="card">
+					// 	<h2>Contact</h2>
+					// 	<Link to={'/contact/add'} id='new-contact'>Add</Link>
+					// </div>

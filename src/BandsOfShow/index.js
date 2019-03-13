@@ -17,14 +17,6 @@ const BandsOfShow = ({bands, setBandToView}) => {
 			</div>
     )
   })
-// Data from bands props //
-// band_id: "1"
-// band_img_url: "sam.jpg"
-// band_name: "laverne"
-// city state website
-// email: "lav@lav.com"
-// id: "2"
-// show_id: "2"
 
 	return (
 		<div className="center">

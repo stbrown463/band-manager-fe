@@ -3,7 +3,7 @@ import BandAdd from '../BandAdd'
 import BandSearch from '../BandSearch'
 
 const BandSelect = ({bands, setBand, band_id, band_name, goHome, user_id, getBandsOfUser}) => {
-	console.log(bands);
+	// console.log(bands);
 
   const bandList = bands.map((band) => {
     return (

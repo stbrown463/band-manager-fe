@@ -61,7 +61,6 @@ class App extends Component {
 
 
   handleChange = (e) => {
-    // console.log('handlechange is called');
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -69,7 +68,6 @@ class App extends Component {
 
   handleRegister = async (e) => {
     e.preventDefault();
-    // console.log("called handleRegiester");
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
@@ -83,7 +81,6 @@ class App extends Component {
       })
 
       const parsedResponse = await response.json()
-      // console.log(parsedResponse);
 
       if (response.ok) {
         this.setState({
@@ -106,7 +103,6 @@ class App extends Component {
 
   handleLogin = async (e) => {
     e.preventDefault();
-    // console.log("called handleRegiester");
 
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
@@ -120,7 +116,6 @@ class App extends Component {
       })
 
       const parsedResponse = await response.json()
-      // console.log(parsedResponse);
 
       if (response.ok) {
         this.setState({
@@ -133,7 +128,6 @@ class App extends Component {
           password: '',
           verify_password: ''
         });
-        // console.log(this.state);
         this.getBandsOfUser()
         this.props.history.push('/bandselect')
       }
@@ -145,7 +139,6 @@ class App extends Component {
   }
 
   logout = async (e) => {
-    console.log('logout was called');
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/logout`)
 
@@ -174,12 +167,11 @@ class App extends Component {
   }
 
   getBandsOfUser = async () => {
-    console.log("getBandsOfUser Was Called");
+    // console.log("getBandsOfUser Was Called");
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/users/bands/${this.state.user_id}`)
 
       const parsedResponse = await response.json()
-      // console.log(parsedResponse);
 
       if (response.ok) {
         this.setState({
@@ -210,13 +202,10 @@ class App extends Component {
 
   goHome = (e) => {
     e.preventDefault()
-    console.log('goHome was called');
     this.props.history.push('/home')
   }
 
   getShowsOfBand = async () => {
-    console.log('get shows was called');
-    console.log(this.props.band_id, "band_id in get shows of band");
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/${this.state.band_id}`)
 
@@ -225,7 +214,6 @@ class App extends Component {
       }
 
       const parsedResponse = await response.json()
-      console.log(parsedResponse);
 
       this.setState({
         shows: [...parsedResponse]
@@ -237,8 +225,6 @@ class App extends Component {
   }
 
   setShow = (showindex, e) => {
-    console.log('setShow was called');
-    console.log(showindex, "show index");
     const show = this.state.shows[showindex]
     this.setState({
       bandshow_id: show.bandshow_id,
@@ -260,8 +246,6 @@ class App extends Component {
   }
 
   setBandToView = async (band_id, e) => {
-    console.log('setBandToView was called');
-    console.log(band_id, "band_id");
     try {
       const response = await fetch (`${process.env.REACT_APP_API_URL}/bands/${band_id}`)
 
@@ -270,40 +254,35 @@ class App extends Component {
       }
 
       const parsedResponse = await response.json()
-      console.log(parsedResponse);
 
-      try {
-        const responseShows = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/${band_id}`)
 
-        if (!responseShows.ok) {
-          throw Error(responseShows.statusText)
-        }
+      const responseShows = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/${band_id}`)
 
-        const showResponse = await responseShows.json()
-        console.log(showResponse);
-
-        this.setState({
-          bandToView: {
-            city: parsedResponse.city,
-            email: parsedResponse.email,
-            id: parsedResponse.id,
-            img_url: parsedResponse.img_url,
-            name: parsedResponse.name,
-            state: parsedResponse.state,
-            website: parsedResponse.website,
-            shows: [...showResponse]
-          }
-        })
-      } catch (err) {
-        console.log(err)
+      if (!responseShows.ok) {
+        throw Error(responseShows.statusText)
       }
+
+      const showResponse = await responseShows.json()
+
+      this.setState({
+        bandToView: {
+          city: parsedResponse.city,
+          email: parsedResponse.email,
+          id: parsedResponse.id,
+          img_url: parsedResponse.img_url,
+          name: parsedResponse.name,
+          state: parsedResponse.state,
+          website: parsedResponse.website,
+          shows: [...showResponse]
+        }
+      })
+
     } catch (err) {
       console.log(err)
     }
   }
 
   getConnections = async () => {
-    console.log('getConnections was called');
     try {
       const venues = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/${this.state.band_id}`)
 
@@ -312,7 +291,6 @@ class App extends Component {
       }
 
       const parsedVenues = await venues.json()
-      console.log(parsedVenues);
 
       const bands = await fetch (`${process.env.REACT_APP_API_URL}/connections/bb/${this.state.band_id}`)
 
@@ -321,7 +299,6 @@ class App extends Component {
       }
 
       const parsedBands = await bands.json()
-      console.log(parsedBands);
 
       const contacts = await fetch (`${process.env.REACT_APP_API_URL}/connections/bc/${this.state.band_id}`)
 
@@ -330,7 +307,6 @@ class App extends Component {
       }
 
       const parsedContacts = await contacts.json()
-      console.log(parsedContacts);
 
       this.setState({
         venueConnects: [...parsedVenues],
@@ -346,7 +322,6 @@ class App extends Component {
 
 
   render() {
-    // console.log(this.state);
     return (
       <React.Fragment>
         <main>
@@ -379,7 +354,11 @@ class App extends Component {
               band_name={this.state.band_name}
               getShowsOfBand={this.getShowsOfBand}
               shows={this.state.shows}
-              setShow={this.setShow}/>} />
+              setShow={this.setShow}
+              venueConnects={this.state.venueConnects}
+              bandConnects={this.state.bandConnects}
+              contactConnects={this.state.contactConnects}
+              getConnections={this.getConnections}/>} />
             <Route exact path='/show/view' render={() => <ShowView 
               username={this.state.username}
               user_id={this.state.user_id}
@@ -448,7 +427,9 @@ class App extends Component {
           </Switch>
         </main>
         <footer>
-          <Navigation logout={this.logout}/>
+          <Navigation 
+            logout={this.logout}
+            user_id={this.state.user_id}/>
         </footer>
       </React.Fragment>
     );
