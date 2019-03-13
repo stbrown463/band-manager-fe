@@ -61,6 +61,7 @@ class ShowAdd extends Component {
           'Content-Type': 'application/json'
         }
   		})
+
 			if (!response.ok) {
         throw Error(response.statusText)
       }
@@ -68,55 +69,60 @@ class ShowAdd extends Component {
        console.log(parsedResponse);
 
       // Add user's band to show
-      if (this.state.userBandPlaying) {
-				try {
-					console.log('hitting add user as member of band');
-					console.log(this.props.user_id);
-					console.log(parsedResponse.id);
-					const bandResponse = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/new`,{
-					  method: 'POST',
-					  body: JSON.stringify({
-					  	band_id: this.props.band_id,
-					  	show_id: parsedResponse.id,
-					  }),
+	    if (this.state.userBandPlaying) {
+
+				console.log('hitting add user as member of band');
+				console.log(this.props.user_id);
+				console.log(parsedResponse.id);
+				const bandResponse = await fetch(`${process.env.REACT_APP_API_URL}/shows/band/new`,{
+				  method: 'POST',
+				  body: JSON.stringify({
+				  	band_id: this.props.band_id,
+				  	show_id: parsedResponse.id,
+				  }),
+				  credentials: 'include',
+				  headers: {
+				    'Content-Type': 'application/json'
+				  }
+					})
+				if (!bandResponse.ok) {
+				  throw Error(bandResponse.statusText)
+				}
+				const parsedBand = await bandResponse.json()
+				console.log(parsedBand);
+
+				console.log('Connect band to venue');
+		  	const connection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/new`, {
+				  method: 'POST',
+				  body: JSON.stringify({
+				  	my_band_id: this.props.band_id,
+				  	venue_id: this.state.venue,
+				  	notes: '',
+				  }),
+				  credentials: 'include',
+				  headers: {
+				    'Content-Type': 'application/json'
+				  }
+		  	})
+				const parsedConnection = await connection.json()
+				console.log(parsedConnection);
+
+				if (connection.status === 200) {
+					// reconnect with venue by c_id
+					const reconnect = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/${parsedConnection.id}/reconnect`, {
+					  method: 'PUT',
 					  credentials: 'include',
 					  headers: {
 					    'Content-Type': 'application/json'
 					  }
 					})
-					if (!bandResponse.ok) {
-					  throw Error(bandResponse.statusText)
+					if (!reconnect.ok) {
+						throw Error(connection.statusText)
 					}
-					const parsedBand = await bandResponse.json()
-					console.log(parsedBand);
-
-					try {
-						console.log('Connect band to venue');
-				  	const connection = await fetch (`${process.env.REACT_APP_API_URL}/connections/bv/new`, {
-						  method: 'POST',
-						  body: JSON.stringify({
-						  	my_band_id: this.props.band_id,
-						  	venue_id: this.state.venue,
-						  	notes: '',
-						  }),
-						  credentials: 'include',
-						  headers: {
-						    'Content-Type': 'application/json'
-						  }
-				  	})
-				  if (!connection.ok) {
-					  throw Error(connection.statusText)
-					}
-
-					const parsedConnection = await connection.json()
+					const parsedReconnect = await reconnect.json()
+					console.log(parsedReconnect);
+				} else {
 					console.log(parsedConnection);
-
-					} catch (err) {
-						console.log(err)
-					}
-
-				} catch (err) {
-					console.log(err)
 				}
 			}
   	} catch (err) {

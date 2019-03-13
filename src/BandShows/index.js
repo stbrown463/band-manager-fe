@@ -7,7 +7,7 @@ const BandShows = ({shows, band_name, setShow}) => {
 	const showList = shows.map((show, i) => {
 
 
-		const date = (new Date(show.date)).toLocaleString("en-US", { timeZone: 'UTC' })
+		const date = (new Date(show.date)).toLocaleDateString("en-US", { timeZone: 'UTC' })
 
     return (
 			<div className="card" key={show.id}>

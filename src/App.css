@@ -40,19 +40,24 @@ main {
   background-color: linen;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border: 2px solid black;
   padding: 0 3px;
+  overflow-x: scroll;
+  flex-wrap: nowrap;
+  position: relative;
+/*  white-space: nowrap;*/
 }
 
 .card {
-  width: 20vw;
+  width: calc(25% - 10px);
   height: 184px;
   background-color: cadetblue;
   border: 2px solid black;
   margin: 3px;
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
   justify-content: space-around;
 }
 
