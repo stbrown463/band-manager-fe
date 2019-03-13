@@ -51,6 +51,7 @@ main {
 
 .card {
   width: calc(25% - 10px);
+  min-width: 200px;
   height: 184px;
   background-color: cadetblue;
   border: 2px solid black;

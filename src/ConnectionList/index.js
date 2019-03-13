@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const ConnectionList = ({venues, bands, contacts, makeConnection}) => {
 
@@ -28,16 +28,16 @@ const ConnectionList = ({venues, bands, contacts, makeConnection}) => {
     )
   })
 
- 	const contactList = contacts.map((contact, i) => {
+ 	// const contactList = contacts.map((contact, i) => {
 
-    return (
-			<div className="card" key={contact.id}>
-				<h3>{contact.name}</h3>
-				<h4>{contact.city}, {contact.state}</h4>
-				<a href={"mailto:" + contact.email} onClick={makeConnection.bind(null, contact.id, "bv")}>Email</a>		
-			</div>
-    )
-  })
+  //   return (
+		// 	<div className="card" key={contact.id}>
+		// 		<h3>{contact.name}</h3>
+		// 		<h4>{contact.city}, {contact.state}</h4>
+		// 		<a href={"mailto:" + contact.email} onClick={makeConnection.bind(null, contact.id, "bv")}>Email</a>		
+		// 	</div>
+  //   )
+  // })
 
 return (
 		<div className = "center">
@@ -50,13 +50,17 @@ return (
 			<div className="card-container">
 				{venueList}
 			</div>
-			<h3>Contacts</h3>
-			<div className="card-container">
-				{contactList}
-			</div>
 		</div>
 	)
 }
 
 
 export default ConnectionList
+
+
+			//<h3>Contacts</h3>
+			// <div className="card-container">
+			// 	{contactList}
+			// </div>
+
+

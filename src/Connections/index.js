@@ -8,9 +8,9 @@ class Connections extends Component {
 
 	makeConnection = async (id, type, e) => {
 		// e.preventDefault()
-		console.log('connect with band was called');
-		console.log('this is id=', id);
-		console.log('this is type=', type);
+		// console.log('connect with band was called');
+		// console.log('this is id=', id);
+		// console.log('this is type=', type);
 
 		let connectionBody = {}
 		if (type === 'bv') {
@@ -34,9 +34,6 @@ class Connections extends Component {
 			  	notes: ''
 			} 
 		}
-
-
-
 
 		try {	
 			const connection = await fetch (`${process.env.REACT_APP_API_URL}/connections/${type}/new`, {
