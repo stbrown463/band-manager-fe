@@ -11,7 +11,7 @@ const BandShows = ({shows, band_name, setShow}) => {
 
     return (
 			<div className="card" key={show.id}>
-				<h3>{show.venue_name}</h3>
+				<h2>{show.venue_name}</h2>
 				<p>
 					{date}<br/>
 					{show.city}, {show.state}<br /><br />

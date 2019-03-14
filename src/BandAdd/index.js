@@ -71,7 +71,7 @@ class BandAdd extends Component {
 		// console.log(this.props);
 		return (
 			<div>
-				<h3>Don't see your band?  Add it here</h3>
+				<h3>Add band</h3>
 				<form onSubmit={this.addBand}>
 					<input name="name" type="text" value={this.state.name} placeholder="name" onChange={this.handleChange}/><br/>
 					<input name="img_url" type="text" value={this.state.img_url} placeholder="img_url" onChange={this.handleChange}/><br/>
@@ -80,8 +80,8 @@ class BandAdd extends Component {
 					<input name="state" type="text" value={this.state.state} placeholder="state" onChange={this.handleChange}/><br/>
 					<input name="website" type="text" value={this.state.website} placeholder="website" onChange={this.handleChange}/><br/>
 					<label>
-						Are you a member of this band?
-						<input name="userIsMember" type="checkbox" value={this.state.userIsMember} placeholder="userIsMember" onChange={this.handleChange}/><br/>
+						I'm in this band:&nbsp; 
+						<input name="userIsMember" className="checkbox" type="checkbox" value={this.state.userIsMember} placeholder="userIsMember" onChange={this.handleChange}/><br/>
 					</label>
 					<button type="submit">Add Band</button>
 				</form>

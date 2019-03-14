@@ -14,7 +14,7 @@ const BandSelect = ({bands, setBand, band_id, band_name, goHome, user_id, getBan
 
 	return(
 		<div>
-			<h2>Select Band</h2>
+			<h1>Select Band</h1>
 			<select onChange={setBand.bind(null)}>
 				<option value={[null]}>No Band</option>
 				{bandList}

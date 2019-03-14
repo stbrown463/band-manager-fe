@@ -176,19 +176,20 @@ class ShowView extends Component {
 	render () {
 		return (
 			<div className="center">
-				<img src={this.props.poster_url} alt={this.props.date} />
 				<h1>{this.props.venue_name} - {new Date(this.props.date).toLocaleDateString("en-US", { timeZone: 'UTC' })}</h1>
-				<div className="row-around">
-					<p>
+				<img src={this.props.poster_url} alt={this.props.date} className="poster"/>
+				<h2>Show Details</h2>
+				<div className="row-around info-container">
+					<p className="show-info">
 						{this.props.streetAddress}<br />
 						{this.props.city}, {this.props.state}, {this.props.zipcode}<br />
 					</p>
-					<p>
-						Load In: {new Date(this.props.loadIn).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
-						Doors: {new Date(this.props.doors).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
-						Show: {new Date(this.props.date).toLocaleTimeString("en-US", { timeZone: 'UTC' })}<br />
+					<p className="show-info">
+						Load In: {new Date(this.props.loadIn).toLocaleTimeString("en-US", { timeZone: 'UTC', hour: '2-digit', minute:'2-digit' })}<br />
+						Doors: {new Date(this.props.doors).toLocaleTimeString("en-US", { timeZone: 'UTC', hour: '2-digit', minute:'2-digit' })}<br />
+						Show: {new Date(this.props.date).toLocaleTimeString("en-US", { timeZone: 'UTC', hour: '2-digit', minute:'2-digit' })}<br />
 					</p>
-					<p>
+					<p className="show-info">
 						Notes: {this.props.notes}
 					</p>
 				</div>

@@ -25,7 +25,7 @@ class BandView extends Component {
 			<div className="center">
 				<h1>{this.props.bandToView.name} - {this.props.bandToView.city}</h1>
 				<img src={this.props.bandToView.img_url} alt={this.props.bandToView.name} />
-				<h3>{this.props.bandToView.email}</h3>
+				<a href={"mailto:" + this.props.bandToView.email} className="link">Email</a>
 			</div>
 		)
 	}

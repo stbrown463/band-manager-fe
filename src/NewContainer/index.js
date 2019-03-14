@@ -5,21 +5,19 @@ class NewContainer extends Component {
 	render () {
 			return (
 			<div>
-				<h1>Add your Band, show, venue, or contact</h1>
+				<h1>Add a Band, Show, or Venue</h1>
 				<div className="row">
 					<div className="card">
 						<h2>Band</h2>
-						<Link to={'/band/add'} id='new-band'>Add</Link>
+						<Link to={'/band/add'} className='link'>Add</Link>
 					</div>
 					<div className="card">
 						<h2>Show</h2>
-						<Link to={'/show/add'} id='new-show'>Add</Link>
+						<Link to={'/show/add'} className='link'>Add</Link>
 					</div>
-				</div>
-				<div className="row">
 					<div className="card">
 						<h2>Venue</h2>
-						<Link to={'/venue/add'} id='new-venue'>Add</Link>
+						<Link to={'/venue/add'} className='link'>Add</Link>
 					</div>
 				</div>
 			</div>
