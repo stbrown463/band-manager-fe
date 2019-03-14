@@ -5,11 +5,11 @@ export class Navigation extends Component {
 render() {
     return (
       <div id='nav-bar'>
-    		<Link to={'/home'} id='home'>Home</Link>
-    		<Link to={'/connections'} id="new"> Connections </Link>
-    		<Link to={'/new'} id='new'>Add</Link>
-        <Link to={'/bandselect'} id='bandselect'>Band Select</Link>
-        <Link to={'/'} id="logout" onClick={this.props.logout.bind(null)}>{this.props.user_id ? "Logout" : "Login"}</Link>
+    		<Link to={'/home'} className='nav-link'>Home</Link>
+    		<Link to={'/connections'} className="nav-link"> Connections </Link>
+    		<Link to={'/new'} className='nav-link'>Add</Link>
+        <Link to={'/bandselect'} className='nav-link'>Band Select</Link>
+        <Link to={'/'} className="nav-link" onClick={this.props.logout.bind(null)}>{this.props.user_id ? "Logout" : "Login"}</Link>
       </div>
     )
   }

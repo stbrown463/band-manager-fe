@@ -324,7 +324,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <main>
+        <main className="center">
           <Switch>
             <Route exact path='/' render={() => <AuthContainer 
                handleRegister={this.handleRegister} 
@@ -423,9 +423,9 @@ class App extends Component {
               bandConnects={this.state.bandConnects}
               contactConnects={this.state.contactConnects}
               getConnections={this.getConnections}/>}/>
-
           </Switch>
         </main>
+        <div className="clear"></div>
         <footer>
           <Navigation 
             logout={this.logout}

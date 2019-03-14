@@ -7,12 +7,10 @@ const BandsOfShow = ({bands, setBandToView}) => {
     return (
 			<div className="card" key={band.id}>
 				<h3>{band.band_name}</h3>
-				<img src={band.img_url} alt={band.band_name}/>
 				<p>
 					{band.band_city}, {band.band_state}<br /><br />
-					{band.email}<br/>
-					{band.band_website}<br />
-					<Link to={'/band/view'} id='bandView' onClick={setBandToView.bind(null, band.band_id)}>More Details</Link>
+					<a href={band.band_website} alt={band.band_name + "website"} className="link">Website</a><br />
+					<Link to={'/band/view'} id='bandView' className="link" onClick={setBandToView.bind(null, band.band_id)}>More Details</Link>
 				</p>
 			</div>
     )
