@@ -93,7 +93,7 @@ class VenueAdd extends Component {
   				<input name="website" type="url" value={this.state.website} placeholder="website" onChange={this.handleChange}/><br/>
   				{this.props.username ? <label>
 						Are you an employeee of this venue?<br/>
-						<input name="userWorksHere" type="checkbox" value={this.state.userWorksHere} placeholder="userWorksHere" onChange={this.handleChange}/><br/> 
+						<input name="userWorksHere" type="checkbox" className="checkbox" value={this.state.userWorksHere} placeholder="userWorksHere" onChange={this.handleChange}/><br/> 
 					</label> : null}
   				<button>Add Venue</button>
   			</form>

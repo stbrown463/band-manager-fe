@@ -137,7 +137,7 @@ class ShowAdd extends Component {
 				<h1>Add a new show</h1>
 
 				<VenueSearch setVenue={this.setVenue} /><br/>
-				<form onSubmit={this.addShow}>
+				<form className="center" onSubmit={this.addShow}>
 					<label>
 						Date of show and start time<br />
 						<input name="date" type="datetime-local" value={this.state.date} placeholder="date" onChange={this.handleChange}/><br/>
@@ -154,7 +154,7 @@ class ShowAdd extends Component {
 					<input name="poster_url" type="text" value={this.state.poster_url} placeholder="poster_url" onChange={this.handleChange}/><br/>
 					{this.props.band_name ? <label>
 						Is {this.props.band_name} playing this show?
-						<input name="userBandPlaying" type="checkbox" value={this.state.userBandPlaying} placeholder="userBandPlaying" onChange={this.handleChange}/><br/> 
+						<input name="userBandPlaying" className="checkbox" type="checkbox" value={this.state.userBandPlaying} placeholder="userBandPlaying" onChange={this.handleChange}/><br/> 
 					</label> : null}
 					<button type="submit">Add Show</button>
 				</form>

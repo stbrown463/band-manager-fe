@@ -11,7 +11,7 @@ const ConnectionList = ({venues, bands, contacts, makeConnection}) => {
     return (
 			<div className="card" key={band.id}>
 				<h3>{band.name}</h3>
-				<h4>{band.city}, {band.state}</h4>
+				<p>{band.city}, {band.state}</p>
 				<a href={"mailto:" + band.email} className="link" onClick={makeConnection.bind(null, band.id, "bb")}>Email</a>		
 			</div>
     )
@@ -22,7 +22,7 @@ const ConnectionList = ({venues, bands, contacts, makeConnection}) => {
     return (
 			<div className="card" key={venue.id}>
 				<h3>{venue.name}</h3>
-				<h4>{venue.city}, {venue.state}</h4>
+				<p>{venue.city}, {venue.state}</p>
 				<a href={"mailto:" + venue.email} className="link" onClick={makeConnection.bind(null, venue.id, "bv")}>Email</a>		
 			</div>
     )

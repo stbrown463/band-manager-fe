@@ -54,7 +54,8 @@ class App extends Component {
 
       venueConnects: [],
       bandConnects: [],
-      contactConnects: []
+      contactConnects: [],
+      onLogin: true,
     }
   }
 
@@ -86,7 +87,13 @@ class App extends Component {
         this.setState({
           user_id: parsedResponse.id,
           password: '',
-          verify_password: ''
+          verify_password: '',
+          bio: parsedResponse.bio,
+          city: parsedResponse.city,
+          email: parsedResponse.email,
+          name: parsedResponse.name,
+          state: parsedResponse.state,
+          onLogin: false,
         });
         console.log(this.state);
         this.getBandsOfUser()
@@ -126,7 +133,8 @@ class App extends Component {
           name: parsedResponse.name,
           state: parsedResponse.state,
           password: '',
-          verify_password: ''
+          verify_password: '',
+          onLogin: false,
         });
         this.getBandsOfUser()
         this.props.history.push('/bandselect')
@@ -158,6 +166,7 @@ class App extends Component {
         bands: [],
         band_id: '',
         band_name: '',
+        onLogin: true
 
       })
 
@@ -429,7 +438,9 @@ class App extends Component {
         <footer>
           <Navigation 
             logout={this.logout}
-            user_id={this.state.user_id}/>
+            user_id={this.state.user_id}
+            onLogin={this.state.onLogin}/>
+          }
         </footer>
       </React.Fragment>
     );

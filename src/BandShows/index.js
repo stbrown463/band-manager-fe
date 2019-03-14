@@ -11,10 +11,10 @@ const BandShows = ({shows, band_name, setShow}) => {
 
     return (
 			<div className="card" key={show.id}>
-				<h2>{show.venue_name}</h2>
+				<h3>{show.venue_name}</h3>
 				<p>
-					{date}<br/>
-					{show.city}, {show.state}<br /><br />
+					{show.city}, {show.state}<br />
+					{date}<br/><br />
 					<button onClick={setShow.bind(null, i)}>more details</button>
 				</p>
 			</div>
