@@ -67,7 +67,7 @@ class VenueAdd extends Component {
 				console.log(parsedMember);
 			}
 			// this.props.getBandsOfUser()
-      this.props.goHome()
+      // this.props.goHome()
   	} catch (err) {
   		console.log(err)
   	}

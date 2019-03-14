@@ -125,7 +125,7 @@ class ShowAdd extends Component {
 					console.log(parsedConnection);
 				}
 			}
-			this.props.goHome()
+			// this.props.goHome()
   	} catch (err) {
   		console.log(err)
   	}
