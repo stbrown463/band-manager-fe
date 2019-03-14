@@ -21,7 +21,7 @@ p, button, label, link, a{
 }
 
 img {
-  max-width: 800px;
+  max-width: 50vw;
 }
 
 button, .nav-link {

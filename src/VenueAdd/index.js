@@ -47,30 +47,27 @@ class VenueAdd extends Component {
 
       // Add user as member of band
       if (this.state.userWorksHere) {
-				try {
-					console.log('hitting add user as member of band');
-					const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/venues/contact/new`,{
-					  method: 'POST',
-					  body: JSON.stringify({
-					  	user_id: this.props.user_id,
-					  	venue_id: parsedResponse.id,
-					  }),
-					  credentials: 'include',
-					  headers: {
-					    'Content-Type': 'application/json'
-					  }
-					})
-					if (!memberResponse.ok) {
-					  throw Error(memberResponse.statusText)
-					}
-					const parsedMember = await memberResponse.json()
-					console.log(parsedMember);
 
-				} catch (err) {
-					console.log(err)
+				console.log('hitting add user as member of band');
+				const memberResponse = await fetch(`${process.env.REACT_APP_API_URL}/venues/contact/new`,{
+				  method: 'POST',
+				  body: JSON.stringify({
+				  	user_id: this.props.user_id,
+				  	venue_id: parsedResponse.id,
+				  }),
+				  credentials: 'include',
+				  headers: {
+				    'Content-Type': 'application/json'
+				  }
+				})
+				if (!memberResponse.ok) {
+				  throw Error(memberResponse.statusText)
 				}
+				const parsedMember = await memberResponse.json()
+				console.log(parsedMember);
 			}
 			// this.props.getBandsOfUser()
+      this.props.goHome()
   	} catch (err) {
   		console.log(err)
   	}

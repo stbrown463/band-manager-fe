@@ -210,7 +210,9 @@ class App extends Component {
   }
 
   goHome = (e) => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
     this.props.history.push('/home')
   }
 
@@ -407,17 +409,20 @@ class App extends Component {
               user_id={this.state.user_id}
               band_id={this.state.band_id}
               band_name={this.state.band_name}
-              getBandsOfUser={this.getBandsOfUser}/>}/>
+              getBandsOfUser={this.getBandsOfUser}
+              goHome={this.goHome}/>}/>
             <Route exact path='/show/add' render={() => <ShowAdd
               username={this.state.username}
               user_id={this.state.user_id}
               band_id={this.state.band_id}
-              band_name={this.state.band_name}/>}/>
+              band_name={this.state.band_name}
+              goHome={this.goHome}/>}/>
             <Route exact path='/venue/add' render={() => <VenueAdd
               username={this.state.username}
               user_id={this.state.user_id}
               band_id={this.state.band_id}
-              band_name={this.state.band_name}/>}/>
+              band_name={this.state.band_name}
+              goHome={this.goHome}/>}/>
             <Route exact path='/contact/add' render={() => <ContactAdd
               username={this.state.username}
               user_id={this.state.user_id}

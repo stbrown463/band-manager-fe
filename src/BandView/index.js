@@ -20,7 +20,7 @@ class BandView extends Component {
 	}
 
 	render () {
-		console.log(this.props);
+		// console.log(this.props);
 		return (
 			<div className="center">
 				<h1>{this.props.bandToView.name} - {this.props.bandToView.city}</h1>
